@@ -1,9 +1,12 @@
 import React from 'react';
+import './style/style.scss';
 
 function App() {
   return (
     <>
-      everyday
+      <div className="body">
+        everyday
+      </div>
     </>
   );
 }
