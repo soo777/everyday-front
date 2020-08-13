@@ -1,14 +1,16 @@
-import React, { ReactChild, ReactChildren } from "react";
+import React, { ReactChild, ReactChildren } from 'react';
+import { Header } from './index';
 
 interface Props {
   children: ReactChild | ReactChildren;
 }
 
-function AppLayout ({ children }: Props) {
+function AppLayout({ children }: Props) {
   return (
     <>
-      {/*applayout*/}
-      {children}
+      <Header />
+
+      { children }
     </>
   );
 }

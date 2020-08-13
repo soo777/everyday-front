@@ -1,8 +1,8 @@
-import React from "react";
-import { Button } from "semantic-ui-react";
-import { AppLayout } from "src/ui";
+import React from 'react';
+import { Button } from 'semantic-ui-react';
+import { AppLayout } from 'src/ui';
 
-function BoardListPage () {
+function BoardListPage() {
   return (
     <>
       <AppLayout>
