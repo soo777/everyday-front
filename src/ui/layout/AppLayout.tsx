@@ -1,4 +1,5 @@
 import React, { ReactChild, ReactChildren } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { Header } from './index';
 
 interface Props {
@@ -8,9 +9,13 @@ interface Props {
 function AppLayout({ children }: Props) {
   return (
     <>
-      <Header />
+      <BrowserRouter basename="/">
+        <div className="everyday">
+          <Header />
 
-      { children }
+          { children }
+        </div>
+      </BrowserRouter>
     </>
   );
 }

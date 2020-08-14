@@ -1,14 +1,15 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import 'src/style/style.scss';
-import BoardListPage from 'src/pages/BoardListPage';
+import { AppLayout } from './ui/layout';
+import Routes from './pages/Routes';
 
 function App() {
   return (
     <>
-      <div className="everyday">
-        <BoardListPage />
-      </div>
+      <AppLayout>
+        <Routes />
+      </AppLayout>
     </>
   );
 }
