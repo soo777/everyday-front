@@ -10,7 +10,7 @@ const initialState: BoardListState = {
 };
 
 function boardList(state:BoardListState = initialState) {
-  return 0;
+  return state.board;
 }
 
 export default boardList;

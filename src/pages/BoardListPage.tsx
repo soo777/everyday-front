@@ -1,6 +1,10 @@
 import React from 'react';
+import useBoard from '../hooks/useBoard';
 
 function BoardListPage() {
+  const { board } = useBoard();
+
+  console.log(board);
   return (
     <>
       <div className="sideBar">
@@ -10,6 +14,9 @@ function BoardListPage() {
         <div className="boardList">
           Board222222
         </div>
+        {
+          board
+        }
       </div>
     </>
   );
