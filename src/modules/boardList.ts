@@ -1,11 +1,12 @@
 type BoardListState = {
-  board: object,
+  board: any,
 }
 
 const initialState: BoardListState = {
   board: [
-    'aaaaa',
-    'bbbbb',
+    'board1',
+    'board2',
+    'board3',
   ],
 };
 

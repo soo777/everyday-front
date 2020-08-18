@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../modules';
 
 function useBoard() {
-  const board = useSelector((state:RootState) => state.boardList);
+  const boardList = useSelector((state:RootState) => state.boardList);
   const dispatch = useDispatch();
 
   return {
-    board,
+    boardList,
   };
 }
 

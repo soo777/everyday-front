@@ -2,9 +2,12 @@ import React from 'react';
 import useBoard from '../hooks/useBoard';
 
 function BoardListPage() {
-  const { board } = useBoard();
+  const { boardList } = useBoard();
 
-  console.log(board);
+  const clickBoard = (board:any) => {
+    console.log(board);
+  };
+
   return (
     <>
       <div className="sideBar">
@@ -15,7 +18,15 @@ function BoardListPage() {
           Board222222
         </div>
         {
-          board
+          boardList.map((board:any, index:any) => (
+            <div
+              key={ board }
+              onClick={ () => { clickBoard(board); } }
+              className="boardList"
+            >
+              { board }
+            </div>
+          ))
         }
       </div>
     </>
