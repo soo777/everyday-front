@@ -1,5 +1,6 @@
 import React from 'react';
 import useBoard from '../hooks/useBoard';
+import Test from './Test';
 
 function BoardListPage() {
   const { boardList } = useBoard();
@@ -29,6 +30,7 @@ function BoardListPage() {
           ))
         }
       </div>
+      <Test />
     </>
   );
 }
