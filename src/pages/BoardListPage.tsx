@@ -31,11 +31,11 @@ function BoardListPage() {
     <>
       <div className="sideBar">
         {
-          console.log(boardList)
+          console.log(boardList.boardList)
         }
         {
-          boardList
-            ? boardList.map((board:any, index:any) => (
+          boardList.boardList
+            ? boardList.boardList.map((board:any, index:any) => (
               <div
                 key={ board.id }
                 onClick={ () => { clickBoard(board.id); } }
