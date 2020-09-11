@@ -7,14 +7,14 @@ function useBoard() {
   const boardList = useSelector((state:RootState) => state.boardList);
   const dispatch = useDispatch();
 
-  const getBoardList1 = useCallback(
+  const getAllBoardList = useCallback(
     (list:any) => dispatch(getBoardList(list)),
     [dispatch],
   );
 
   return {
     boardList,
-    getBoardList1,
+    getAllBoardList,
   };
 }
 

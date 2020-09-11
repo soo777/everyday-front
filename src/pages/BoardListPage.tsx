@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
-import { Icon } from 'semantic-ui-react';
+import React, { useEffect, useState } from 'react';
+import { Form, Icon, Modal } from 'semantic-ui-react';
 import axios from 'axios';
 import useBoard from '../hooks/useBoard';
 import Test from './Test';
 
 function BoardListPage() {
-  const { boardList, getBoardList1 } = useBoard();
+  const [createModal, setCreateModal] = useState(false);
+
+  const { boardList, getAllBoardList } = useBoard();
 
   const getBoardList = async () => {
     const response = await axios.get('/board').then((data) => {
       const list = data.data.object;
       console.log(list);
-      getBoardList1(list);
+      getAllBoardList(list);
     });
   };
 
@@ -25,6 +27,7 @@ function BoardListPage() {
 
   const createBoard = () => {
     console.log('create board');
+    setCreateModal(true);
   };
 
   return (
@@ -53,6 +56,12 @@ function BoardListPage() {
       </div>
 
       { /* <Test /> */ }
+
+      {
+        createModal
+          ? <div>modal</div>
+          : ''
+      }
     </>
   );
 }
