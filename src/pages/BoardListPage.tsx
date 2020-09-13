@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Button,
-  Form, Icon, Input, Modal,
-} from "semantic-ui-react";
+  Icon,
+} from 'semantic-ui-react';
 import axios from 'axios';
 import useBoard from '../hooks/useBoard';
 import Test from './Test';
+import { CreateBoardModal } from '../ui/board';
 
 function BoardListPage() {
   const [createModal, setCreateModal] = useState(false);
@@ -63,16 +63,7 @@ function BoardListPage() {
       {
         createModal
           ? (
-            <div className="createModal">
-              <div>
-                modal
-              </div>
-              <Input placeHolder="이름을 입력하세요" />
-              <div>
-                <Button>확인</Button>
-                <Button>취소</Button>
-              </div>
-            </div>
+            <CreateBoardModal />
           )
           : ''
       }

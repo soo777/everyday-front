@@ -1,0 +1,25 @@
+.createModal {
+  width: 300px;
+  height: 200px;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+
+  .header {
+    padding: 10px;
+    background: none;
+  }
+
+  .content {
+    padding: 10px;
+
+    .input {
+      width: 100%;
+    }
+  }
+
+  .footer {
+    padding: 10px;
+    text-align: right;
+  }
+}

@@ -2,7 +2,7 @@
   width: 25%;
   height: 100vh;
   background-color: aquamarine;
-  float: left;
+  //float: left;
 
   .boardList {
     background-color: red;
@@ -18,8 +18,3 @@
   }
 }
 
-.createModal {
-  position: absolute;
-  top: 45%;
-  left: 45%;
-}
