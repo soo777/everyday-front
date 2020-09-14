@@ -1,9 +1,16 @@
+.dimmer {
+  width: 2000px;
+  height: 2000px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .createModal {
   width: 300px;
   height: 200px;
   position: absolute;
   top: 45%;
   left: 45%;
+  background-color: #fff;
 
   .header {
     padding: 10px;
