@@ -8,15 +8,15 @@ import Test from './Test';
 import { CreateBoardModal } from '../ui/board';
 
 function BoardListPage() {
-  const [createModal, setCreateModal] = useState(false);
+  // const [createModal, setCreateModal] = useState(false);
 
-  const { boardList, getAllBoardList } = useBoard();
+  const { board, getBoardListOn, setCreateBoardModalOn } = useBoard();
 
   const getBoardList = async () => {
     const response = await axios.get('/board').then((data) => {
       const list = data.data.object;
       console.log(list);
-      getAllBoardList(list);
+      getBoardListOn(list);
     });
   };
 
@@ -30,24 +30,25 @@ function BoardListPage() {
 
   const createBoard = () => {
     console.log('create board');
-    setCreateModal(true);
+    // setCreateModal(true);
+    setCreateBoardModalOn(true);
   };
 
   return (
     <>
       <div className="sideBar">
         {
-          console.log(boardList.boardList)
+          console.log(board.boardList)
         }
         {
-          boardList.boardList
-            ? boardList.boardList.map((board:any, index:any) => (
+          board.boardList
+            ? board.boardList.map((boardList:any, index:any) => (
               <div
-                key={ board.id }
-                onClick={ () => { clickBoard(board.id); } }
+                key={ boardList.id }
+                onClick={ () => { clickBoard(boardList.id); } }
                 className="boardList"
               >
-                { board.boardName }
+                { boardList.boardName }
               </div>
             ))
             : ''
@@ -61,7 +62,7 @@ function BoardListPage() {
       { /* <Test /> */ }
 
       {
-        createModal
+        board.createBoardModal
           ? (
             <CreateBoardModal />
           )

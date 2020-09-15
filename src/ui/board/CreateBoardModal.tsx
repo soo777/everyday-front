@@ -1,7 +1,15 @@
 import React from 'react';
 import { Button, Input } from 'semantic-ui-react';
+import useBoard from '../../hooks/useBoard';
 
 function CreateBoardModal() {
+  const { setCreateBoardModalOn } = useBoard();
+
+  const closeModal = () => {
+    console.log('close modal');
+    setCreateBoardModalOn(false);
+  };
+
   return (
     <>
       <div className="dimmer">
@@ -17,7 +25,7 @@ function CreateBoardModal() {
           </div>
           <div className="footer">
             <Button>확인</Button>
-            <Button>취소</Button>
+            <Button onClick={ closeModal }>취소</Button>
           </div>
         </div>
       </div>

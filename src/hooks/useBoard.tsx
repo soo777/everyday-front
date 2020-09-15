@@ -1,20 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { RootState } from '../modules';
-import { getBoardList } from '../modules/boardList';
+import { getBoardList, setCreateBoardModal } from '../modules/board';
 
 function useBoard() {
-  const boardList = useSelector((state:RootState) => state.boardList);
+  const board = useSelector((state:RootState) => state.board);
   const dispatch = useDispatch();
 
-  const getAllBoardList = useCallback(
+  const getBoardListOn = useCallback(
     (list:any) => dispatch(getBoardList(list)),
     [dispatch],
   );
 
+  const setCreateBoardModalOn = useCallback(
+    (bool:boolean) => dispatch(setCreateBoardModal(bool)),
+    [dispatch],
+  );
+
   return {
-    boardList,
-    getAllBoardList,
+    board,
+    getBoardListOn,
+    setCreateBoardModalOn,
   };
 }
 
