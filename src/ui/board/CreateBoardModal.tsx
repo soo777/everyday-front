@@ -1,13 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Input } from 'semantic-ui-react';
+import axios from 'axios';
 import useBoard from '../../hooks/useBoard';
 
 function CreateBoardModal() {
-  const { setCreateBoardModalOn } = useBoard();
+  const [boardInput, setBoardInput] = useState('');
+
+  const { setCreateBoardModalFn, getBoardListFn } = useBoard();
 
   const closeModal = () => {
-    console.log('close modal');
-    setCreateBoardModalOn(false);
+    setCreateBoardModalFn(false);
+  };
+
+  const getBoardList = async () => {
+    await axios.get('/board').then((data) => {
+      const list = data.data.object;
+      console.log(list);
+      getBoardListFn(list);
+    });
+  };
+
+  const createBoard = async () => {
+    console.log(boardInput);
+
+    const payload = {
+      boardName: boardInput,
+    };
+
+    await axios.post('/board', payload).then((data) => {
+      console.log(data);
+
+      if (data.data.status === true) {
+        setCreateBoardModalFn(false);
+
+        getBoardList().then((r) => {});
+      }
+    });
+  };
+
+  const handleBoardInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    setBoardInput(input);
   };
 
   return (
@@ -20,11 +53,13 @@ function CreateBoardModal() {
           <div className="content">
             <Input
               className="input"
-              placeHolder="이름을 입력하세요"
+              value={ boardInput }
+              onChange={ handleBoardInput }
+              placeholder="이름을 입력하세요"
             />
           </div>
           <div className="footer">
-            <Button>확인</Button>
+            <Button onClick={ createBoard }>확인</Button>
             <Button onClick={ closeModal }>취소</Button>
           </div>
         </div>

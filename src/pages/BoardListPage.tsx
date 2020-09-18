@@ -10,13 +10,13 @@ import { CreateBoardModal } from '../ui/board';
 function BoardListPage() {
   // const [createModal, setCreateModal] = useState(false);
 
-  const { board, getBoardListOn, setCreateBoardModalOn } = useBoard();
+  const { board, getBoardListFn, setCreateBoardModalFn } = useBoard();
 
   const getBoardList = async () => {
-    const response = await axios.get('/board').then((data) => {
+    await axios.get('/board').then((data) => {
       const list = data.data.object;
       console.log(list);
-      getBoardListOn(list);
+      getBoardListFn(list);
     });
   };
 
@@ -31,15 +31,15 @@ function BoardListPage() {
   const createBoard = () => {
     console.log('create board');
     // setCreateModal(true);
-    setCreateBoardModalOn(true);
+    setCreateBoardModalFn(true);
   };
 
   return (
     <>
       <div className="sideBar">
-        {
-          console.log(board.boardList)
-        }
+        {/*{*/}
+        {/*  console.log(board.boardList)*/}
+        {/*}*/}
         {
           board.boardList
             ? board.boardList.map((boardList:any, index:any) => (

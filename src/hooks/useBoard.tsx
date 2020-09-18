@@ -7,20 +7,20 @@ function useBoard() {
   const board = useSelector((state:RootState) => state.board);
   const dispatch = useDispatch();
 
-  const getBoardListOn = useCallback(
+  const getBoardListFn = useCallback(
     (list:any) => dispatch(getBoardList(list)),
     [dispatch],
   );
 
-  const setCreateBoardModalOn = useCallback(
+  const setCreateBoardModalFn = useCallback(
     (bool:boolean) => dispatch(setCreateBoardModal(bool)),
     [dispatch],
   );
 
   return {
     board,
-    getBoardListOn,
-    setCreateBoardModalOn,
+    getBoardListFn,
+    setCreateBoardModalFn,
   };
 }
 
