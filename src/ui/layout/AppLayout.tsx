@@ -1,6 +1,6 @@
 import React, { ReactChild, ReactChildren } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Header } from './index';
+import { Footer, Header } from './index';
 
 interface Props {
   children: ReactChild | ReactChildren;
@@ -14,6 +14,8 @@ function AppLayout({ children }: Props) {
           <Header />
 
           { children }
+
+          <Footer />
         </div>
       </BrowserRouter>
     </>

@@ -8,9 +8,18 @@ function BoardPage() {
           sidebar
         </div>
         <div className="content">
-          content
+          <div>
+            { /* 입력 박스 */ }
+            <div className="createItem">
+              box
+            </div>
+            { /* 리스트 */ }
+            <div className="itemList">
+              list
+            </div>
+          </div>
         </div>
-        <div>
+        <div className="sideBar">
           sidebar
         </div>
       </div>

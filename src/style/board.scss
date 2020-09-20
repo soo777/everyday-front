@@ -1,16 +1,33 @@
 .board {
-  height: 1000px;
+  height: 830px;
 
   .nav {
     width: 20%;
+    height: 100%;
     float: left;
+    background-color: cadetblue;
   }
   .content {
     width: 60%;
+    height: 100%;
     float: left;
+    padding: 10px;
+    background-color: beige;
+
+    .createItem {
+      height: 100px;
+      background-color: aquamarine;
+    }
+
+    .itemList {
+      height: 100%;
+    }
   }
-  .sidebard {
+  .sideBar {
     width: 20%;
+    height: 100%;
+    float: left;
+    background-color: darkgrey;
   }
 }
 
