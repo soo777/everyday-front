@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, TextArea } from 'semantic-ui-react';
 
 function BoardPage() {
   return (
@@ -11,11 +12,29 @@ function BoardPage() {
           <div>
             { /* 입력 박스 */ }
             <div className="createItem">
-              box
+              <TextArea
+                placeholder="오늘 무엇을 하셨나요?"
+              />
+              <div className="save">
+                <Button>저장</Button>
+              </div>
             </div>
             { /* 리스트 */ }
             <div className="itemList">
-              list
+              <div className="item">
+                list
+                <br />
+                as
+                list
+                <br />
+                as
+              </div>
+              <div className="item">
+                list
+              </div>
+              <div className="item">
+                list
+              </div>
             </div>
           </div>
         </div>

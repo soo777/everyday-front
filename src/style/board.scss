@@ -15,12 +15,34 @@
     background-color: beige;
 
     .createItem {
-      height: 100px;
+      height: 150px;
+      padding: 5px;
       background-color: aquamarine;
+
+      TextArea {
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 100px;
+        max-height: 100px;
+        padding: 10px;
+      }
+
+      .save {
+        text-align: right;
+
+        Button {
+          width: 80px;
+        }
+      }
     }
 
     .itemList {
       height: 100%;
+      padding: 5px;
+
+      .item {
+        margin-bottom: 30px;
+      }
     }
   }
   .sideBar {
