@@ -17,6 +17,7 @@
     .createItem {
       height: 150px;
       padding: 5px;
+      margin-bottom: 30px;
       background-color: aquamarine;
 
       TextArea {
@@ -41,7 +42,13 @@
       padding: 5px;
 
       .item {
-        margin-bottom: 30px;
+        margin-bottom: 50px;
+
+        i {
+          float: right;
+          font-size: 15px;
+          cursor: pointer;
+        }
       }
     }
   }

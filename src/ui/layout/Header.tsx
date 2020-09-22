@@ -4,7 +4,7 @@ import { Icon } from 'semantic-ui-react';
 function Header() {
   return (
     <>
-      <div className="header">
+      <div className="top header">
         <div className="center aligned">
           everyday
           <span className="user">

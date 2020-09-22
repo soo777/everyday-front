@@ -3,7 +3,15 @@ import React from 'react';
 function Footer() {
   return (
     <>
-      Footer
+      <div>
+        FooterFooterFooterFooterFooter
+        FooterFooterFooterFooterFooter
+        FooterFooterFooterFooterFooter
+        FooterFooterFooterFooterFooter
+        FooterFooterFooterFooterFooter
+        FooterFooterFooterFooterFooter
+        FooterFooterFooterFooter
+      </div>
     </>
   );
 }

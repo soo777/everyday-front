@@ -1,5 +1,6 @@
 import React, { ReactChild, ReactChildren } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
 import { Footer, Header } from './index';
 
 interface Props {
@@ -10,13 +11,15 @@ function AppLayout({ children }: Props) {
   return (
     <>
       <BrowserRouter basename="/">
-        <div className="everyday">
-          <Header />
+        <Container>
+          <div className="everyday">
+            <Header />
 
-          { children }
+            { children }
 
-          <Footer />
-        </div>
+            <Footer />
+          </div>
+        </Container>
       </BrowserRouter>
     </>
   );

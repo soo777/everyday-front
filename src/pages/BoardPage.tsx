@@ -1,5 +1,8 @@
 import React from 'react';
-import { Button, TextArea } from 'semantic-ui-react';
+import {
+  Button, Header, Icon, TextArea,
+} from 'semantic-ui-react';
+import { Item } from '../ui';
 
 function BoardPage() {
   return (
@@ -21,20 +24,9 @@ function BoardPage() {
             </div>
             { /* 리스트 */ }
             <div className="itemList">
-              <div className="item">
-                list
-                <br />
-                as
-                list
-                <br />
-                as
-              </div>
-              <div className="item">
-                list
-              </div>
-              <div className="item">
-                list
-              </div>
+              <Item />
+              <Item />
+              <Item />
             </div>
           </div>
         </div>
