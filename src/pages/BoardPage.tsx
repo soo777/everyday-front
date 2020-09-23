@@ -11,7 +11,7 @@ function BoardPage() {
         <div className="nav">
           sidebar
         </div>
-        <div className="content">
+        <div className="middle content">
           <div>
             { /* 입력 박스 */ }
             <div className="createItem">
