@@ -14,14 +14,14 @@ export const setCreateBoardModal = createAction(SET_CREATE_BOARD_MODAL)<boolean>
 // type BoardAction =
 //   | ReturnType<typeof getBoardList>;
 const actions = { getBoardList, setCreateBoardModal };
-type BoardListAction = ActionType<typeof actions>;
+type BoardAction = ActionType<typeof actions>;
 
-type BoardListState = {
+type BoardState = {
   boardList: any,
   createBoardModal:boolean,
 }
 
-const initialState: BoardListState = {
+const initialState: BoardState = {
   boardList: [
     { id: 'board1', boardName: 'board1' },
     { id: 'board2', boardName: 'board2' },
@@ -30,7 +30,7 @@ const initialState: BoardListState = {
   createBoardModal: false,
 };
 
-// function boardList(state:BoardListState = initialState, action: BoardAction) {
+// function boardList(state:BoardState = initialState, action: BoardAction) {
 //   switch (action.type) {
 //     case GET_BOARD_LIST:
 //       return { ...state, boardList: action.payload };
@@ -38,7 +38,7 @@ const initialState: BoardListState = {
 //       return state;
 //   }
 // }
-const board = createReducer<BoardListState, BoardListAction>(initialState, {
+const board = createReducer<BoardState, BoardAction>(initialState, {
   [GET_BOARD_LIST]: (state, action) => ({ ...state, boardList: action.payload }),
   [SET_CREATE_BOARD_MODAL]: (state, action) => ({ ...state, createBoardModal: action.payload }),
 });
