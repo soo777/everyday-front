@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Button, Header, Icon, TextArea,
 } from 'semantic-ui-react';
+import axios from 'axios';
 import { Item } from '../ui';
+import useItem from '../hooks/useItem';
 
 function BoardPage() {
+  const { item, getItemListFn } = useItem();
+
+  const getItemList = async () => {
+    await axios.get('/item').then((data) => {
+      console.log(data.data.object);
+      getItemListFn(data.data.object);
+    });
+  };
+
+  useEffect(() => {
+    getItemList().then((r) => {});
+  },[]);
+
   return (
     <>
       <div className="board">

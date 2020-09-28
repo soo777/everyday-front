@@ -16,7 +16,7 @@ const initialState: ItemState = {
 };
 
 const item = createReducer<ItemState, ItemAction>(initialState, {
-  [GET_ITEM_LIST]: (state, action) => ({ ...state }),
+  [GET_ITEM_LIST]: (state, action) => ({ ...state, itemList: action.payload }),
 });
 
 export default item;
