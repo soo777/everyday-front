@@ -1,7 +1,12 @@
 import React from 'react';
 import { Header, Icon, Comment } from 'semantic-ui-react';
+import ItemModel from '../../model/ItemModel';
 
-function Item() {
+type Props = {
+  item: ItemModel;
+};
+
+function Item({ item }:Props) {
   return (
     <>
       { /* <div className="item"> */ }
@@ -19,18 +24,18 @@ function Item() {
           <Comment.Avatar as="a" src="/images/non_user.png" />
           <Comment.Content>
             <Comment.Author>
-              Stevie Feliciano
+              { item.creator }
               <Icon name="options" className="option" />
             </Comment.Author>
             <Comment.Metadata>
-              <div>2 days ago</div>
+              <div>{ item.createDate }</div>
               <div>
-                <Icon name="star" />5 Faves
+                <Icon name="star" />
+                { item.star }
               </div>
             </Comment.Metadata>
             <Comment.Text>
-              Hey guys, I hope this example comment is helping you read this
-              documentation.
+              { item.content }
             </Comment.Text>
           </Comment.Content>
         </Comment>

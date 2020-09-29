@@ -5,6 +5,7 @@ import {
 import axios from 'axios';
 import { Item } from '../ui';
 import useItem from '../hooks/useItem';
+import ItemModel from '../model/ItemModel';
 
 function BoardPage() {
   const { item, getItemListFn } = useItem();
@@ -18,7 +19,7 @@ function BoardPage() {
 
   useEffect(() => {
     getItemList().then((r) => {});
-  },[]);
+  }, []);
 
   return (
     <>
@@ -39,9 +40,18 @@ function BoardPage() {
             </div>
             { /* 리스트 */ }
             <div className="itemList">
-              <Item />
-              <Item />
-              <Item />
+              {
+                console.log(item)
+              }
+              {
+                item.itemList
+                  ? item.itemList.map((itemList:ItemModel, index:number) => (
+                    <Item
+                      item={ itemList }
+                    />
+                  ))
+                  : ''
+              }
             </div>
           </div>
         </div>

@@ -14,7 +14,7 @@ function useItem() {
 
   return {
     item,
-    getItemListFn
+    getItemListFn,
   };
 }
 
