@@ -4,9 +4,9 @@ import axios from 'axios';
 import useBoard from '../../hooks/useBoard';
 
 function CreateBoardModal() {
-  const [boardInput, setBoardInput] = useState('');
-
   const { setCreateBoardModalFn, getBoardListFn } = useBoard();
+
+  const [boardInput, setBoardInput] = useState('');
 
   const closeModal = () => {
     setCreateBoardModalFn(false);

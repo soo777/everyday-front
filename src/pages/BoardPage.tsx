@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import {
-  Button, Header, Icon, TextArea,
+  Button, Header, Icon, TextArea, TextAreaProps,
 } from 'semantic-ui-react';
 import axios from 'axios';
 import { Item } from '../ui';
@@ -9,6 +9,8 @@ import ItemModel from '../model/ItemModel';
 
 function BoardPage() {
   const { item, getItemListFn } = useItem();
+
+  const [content, setContent] = useState<string | number | undefined>('');
 
   const getItemList = async () => {
     await axios.get('/item').then((data) => {
@@ -20,6 +22,28 @@ function BoardPage() {
   useEffect(() => {
     getItemList().then((r) => {});
   }, []);
+
+  const handleContentArea = (e: SyntheticEvent, data: TextAreaProps) => {
+    setContent(data.value);
+  };
+
+  const createItem = async () => {
+    console.log('create item');
+    console.log(content);
+
+    const payload = {
+      content,
+    };
+
+    await axios.post('/item', payload).then((data) => {
+      console.log(data);
+
+      if (data.data.status === true) {
+        setContent('');
+        getItemList().then((r) => {});
+      }
+    });
+  };
 
   return (
     <>
@@ -33,16 +57,15 @@ function BoardPage() {
             <div className="createItem">
               <TextArea
                 placeholder="오늘 무엇을 하셨나요?"
+                value={ content }
+                onChange={ handleContentArea }
               />
               <div className="save">
-                <Button>저장</Button>
+                <Button onClick={ createItem }>저장</Button>
               </div>
             </div>
             { /* 리스트 */ }
             <div className="itemList">
-              {
-                console.log(item)
-              }
               {
                 item.itemList
                   ? item.itemList.map((itemList:ItemModel, index:number) => (
