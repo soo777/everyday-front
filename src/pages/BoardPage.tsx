@@ -3,7 +3,7 @@ import {
   Button, Header, Icon, TextArea, TextAreaProps,
 } from 'semantic-ui-react';
 import axios from 'axios';
-import { Item } from '../ui';
+import { AppLayout, Item } from '../ui';
 import useItem from '../hooks/useItem';
 import ItemModel from '../model/ItemModel';
 
@@ -47,26 +47,27 @@ function BoardPage() {
 
   return (
     <>
-      <div className="board">
-        <div className="nav">
-          sidebar
-        </div>
-        <div className="middle content">
-          <div>
-            { /* 입력 박스 */ }
-            <div className="createItem">
-              <TextArea
-                placeholder="오늘 무엇을 하셨나요?"
-                value={ content }
-                onChange={ handleContentArea }
-              />
-              <div className="save">
-                <Button onClick={ createItem }>저장</Button>
+      <AppLayout>
+        <div className="board">
+          <div className="nav">
+            sidebar
+          </div>
+          <div className="middle content">
+            <div>
+              { /* 입력 박스 */ }
+              <div className="createItem">
+                <TextArea
+                  placeholder="오늘 무엇을 하셨나요?"
+                  value={ content }
+                  onChange={ handleContentArea }
+                />
+                <div className="save">
+                  <Button onClick={ createItem }>저장</Button>
+                </div>
               </div>
-            </div>
-            { /* 리스트 */ }
-            <div className="itemList">
-              {
+              { /* 리스트 */ }
+              <div className="itemList">
+                {
                 item.itemList
                   ? item.itemList.map((itemList:ItemModel, index:number) => (
                     <Item
@@ -75,13 +76,14 @@ function BoardPage() {
                   ))
                   : ''
               }
+              </div>
             </div>
           </div>
+          <div className="sideBar">
+            sidebar
+          </div>
         </div>
-        <div className="sideBar">
-          sidebar
-        </div>
-      </div>
+      </AppLayout>
     </>
   );
 }

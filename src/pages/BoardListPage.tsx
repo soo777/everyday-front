@@ -6,6 +6,7 @@ import axios from 'axios';
 import useBoard from '../hooks/useBoard';
 import Test from './Test';
 import { CreateBoardModal } from '../ui/board';
+import { AppLayout } from '../ui/layout';
 
 function BoardListPage() {
   // const [createModal, setCreateModal] = useState(false);
@@ -36,11 +37,12 @@ function BoardListPage() {
 
   return (
     <>
-      <div className="sideBar">
-        {/*{*/}
-        {/*  console.log(board.boardList)*/}
-        {/*}*/}
-        {
+      <AppLayout>
+        <div className="sideBar">
+          { /* { */ }
+          { /*  console.log(board.boardList) */ }
+          { /* } */ }
+          {
           board.boardList
             ? board.boardList.map((boardList:any, index:any) => (
               <div
@@ -53,21 +55,22 @@ function BoardListPage() {
             ))
             : ''
         }
-        <div className="create" onClick={ createBoard }>
-          <Icon disabled name="plus" />
-          Create Board
+          <div className="create" onClick={ createBoard }>
+            <Icon disabled name="plus" />
+            Create Board
+          </div>
         </div>
-      </div>
 
-      { /* <Test /> */ }
+        { /* <Test /> */ }
 
-      {
+        {
         board.createBoardModal
           ? (
             <CreateBoardModal />
           )
           : ''
       }
+      </AppLayout>
     </>
   );
 }
