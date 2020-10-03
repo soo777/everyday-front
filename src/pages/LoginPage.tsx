@@ -1,23 +1,50 @@
-import React from 'react';
-import { Button, Input } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Button, Header, Input } from 'semantic-ui-react';
 
 function LoginPage() {
+  const [id, setId] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const handleIdInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const idInput = e.target.value;
+    setId(idInput);
+  };
+
+  const handlePasswordInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const passwordInput = e.target.value;
+    setPassword(passwordInput);
+  };
+
+  const login = () => {
+    console.log(id, password);
+  };
+
   return (
     <>
-      <div>
-        <div>
-          Login
+      <div className="login">
+        <div className="header">
+          <Header as="h3">Login</Header>
         </div>
-        <div>
-          Id
-          <Input />
+        <div className="login_input">
+          <Input
+            value={ id }
+            onChange={ handleIdInput }
+            placeholder="id"
+          />
         </div>
-        <div>
-          Password
-          <Input />
+        <div className="login_input">
+          <Input
+            value={ password }
+            onChange={ handlePasswordInput }
+            placeholder="password"
+          />
         </div>
-        <div>
-          <Button>Login</Button>
+        <div className="login_btn">
+          <Button
+            onClick={ login }
+          >
+            Login
+          </Button>
         </div>
       </div>
     </>

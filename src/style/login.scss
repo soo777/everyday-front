@@ -1,0 +1,22 @@
+.login {
+  position: absolute;
+  top: 35%;
+  left: 45%;
+
+  .header {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .login_input {
+    padding: 5px 5px 0px 5px;
+  }
+
+  .login_btn {
+    padding: 5px;
+
+    Button {
+      width: 100%;
+    }
+  }
+}
