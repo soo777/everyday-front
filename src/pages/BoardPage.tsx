@@ -2,10 +2,12 @@ import React, { SyntheticEvent, useEffect, useState } from 'react';
 import {
   Button, Header, Icon, TextArea, TextAreaProps,
 } from 'semantic-ui-react';
-import axios from 'axios';
 import { AppLayout, Item } from '../ui';
 import useItem from '../hooks/useItem';
 import ItemModel from '../model/ItemModel';
+import { default as axiosInstance } from '../util/AxiosUtil';
+
+const axios = axiosInstance.instance;
 
 function BoardPage() {
   const { item, getItemListFn } = useItem();

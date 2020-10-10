@@ -10,7 +10,7 @@ function Routes() {
       <Switch>
         <Route path="/boardList" render={ (props) => <BoardListPage /> } />
         <Route path="/board" render={ (props) => <BoardPage /> } />
-        <Route path="/" render={ (props) => <LoginPage /> } />
+        <Route path="/" render={ (props) => <LoginPage { ...props } /> } />
       </Switch>
     </>
   );

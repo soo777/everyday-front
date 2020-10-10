@@ -3,8 +3,10 @@ import {
   Button, Form, Header, Input,
 } from 'semantic-ui-react';
 import axios from 'axios';
+import { RouteComponentProps } from 'react-router-dom';
+import { Constant } from '../config';
 
-function LoginPage() {
+function LoginPage(routesProps: RouteComponentProps) {
   const [userId, setUserId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -28,7 +30,9 @@ function LoginPage() {
       console.log(data);
       if (data.status === 200) {
         console.log('login success');
-        localStorage.setItem('everyday_token', data.data.object);
+        localStorage.setItem(Constant.JWT_TOKEN, data.data.object);
+
+        routesProps.history.push('/board');
       } else {
         console.log('login fail');
       }
