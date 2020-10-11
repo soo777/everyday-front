@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { RootState } from '../modules';
-import { getBoardList, setCreateBoardModal } from '../modules/board';
+import { RootState } from 'modules';
+import { getBoardList, setCreateBoardModal } from 'modules/board';
 
 function useBoard() {
   const board = useSelector((state:RootState) => state.board);

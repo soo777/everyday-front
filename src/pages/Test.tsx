@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { default as axiosInstance } from '../util/AxiosUtil';
+
+const axios = axiosInstance.instance;
 
 function Test() {
   const [users, setUsers] = useState(null);

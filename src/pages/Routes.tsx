@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
-import BoardListPage from './BoardListPage';
-import BoardPage from './BoardPage';
-import LoginPage from './LoginPage';
+import BoardListPage from 'pages/BoardListPage';
+import BoardPage from 'pages/BoardPage';
+import LoginPage from 'pages/LoginPage';
 
 function Routes() {
   return (

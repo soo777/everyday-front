@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Input } from 'semantic-ui-react';
-import axios from 'axios';
 import useBoard from '../../hooks/useBoard';
+import { default as axiosInstance } from '../../util/AxiosUtil';
+
+const axios = axiosInstance.instance;
 
 function CreateBoardModal() {
   const { setCreateBoardModalFn, getBoardListFn } = useBoard();

@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import {
   Button, Form, Header, Input,
 } from 'semantic-ui-react';
-import axios from 'axios';
 import { RouteComponentProps } from 'react-router-dom';
-import { Constant } from '../config';
+import { Constant } from 'config';
+import { default as axiosInstance } from 'util/AxiosUtil';
+
+const axios = axiosInstance.instance;
 
 function LoginPage(routesProps: RouteComponentProps) {
   const [userId, setUserId] = useState<string>('');

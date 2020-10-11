@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {
   Icon,
 } from 'semantic-ui-react';
-import axios from 'axios';
-import useBoard from '../hooks/useBoard';
-import Test from './Test';
-import { CreateBoardModal } from '../ui/board';
-import { AppLayout } from '../ui/layout';
+import useBoard from 'hooks/useBoard';
+import { CreateBoardModal } from 'ui/board';
+import { AppLayout } from 'ui/layout';
+import { default as axiosInstance } from 'util/AxiosUtil';
+
+const axios = axiosInstance.instance;
 
 function BoardListPage() {
   // const [createModal, setCreateModal] = useState(false);
