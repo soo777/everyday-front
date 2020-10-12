@@ -19,4 +19,17 @@
       width: 100%;
     }
   }
+
+  .sign_div {
+    text-align: end;
+    padding-right: 5px;
+
+    .signIn {
+      cursor: pointer;
+    }
+
+    .signIn:hover {
+      color: aquamarine;
+    }
+  }
 }
