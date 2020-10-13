@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import {
-  Button, Form, Header, Input, Modal, Image, Table,
+  Button, Form, Header, Input,
 } from 'semantic-ui-react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Constant } from 'config';
 import { default as axiosInstance } from 'util/AxiosUtil';
+import useUser from 'hooks/useUser';
+import { CreateUserModal } from 'ui/common';
 
 const axios = axiosInstance.instance;
 
 function LoginPage(routesProps: RouteComponentProps) {
   const [userId, setUserId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [modalOpen, setModal] = useState<boolean>(true);
+
+  const { user, handleCreateUserModalFn } = useUser();
 
   const handleIdInput = (e:React.ChangeEvent<HTMLInputElement>) => {
     const idInput = e.target.value;
@@ -24,7 +27,7 @@ function LoginPage(routesProps: RouteComponentProps) {
   };
 
   const signIn = () => {
-    setModal(true);
+    handleCreateUserModalFn(true);
   };
 
   const login = async () => {
@@ -84,69 +87,7 @@ function LoginPage(routesProps: RouteComponentProps) {
           </div>
         </Form>
       </div>
-
-      <Modal
-        onClose={ () => setModal(false) }
-        onOpen={ () => setModal(true) }
-        open={ modalOpen }
-        size="tiny"
-      >
-        <Modal.Header>Sign In</Modal.Header>
-        <Modal.Content>
-          <Form>
-            <Table celled>
-              <Table.Body>
-                <Table.Row>
-                  <Table.Cell>
-                    ID
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Input />
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>
-                    Password
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Input type="password" />
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>
-                    Password 확인
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Input  type="password" />
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>
-                    이름
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Input />
-                  </Table.Cell>
-                </Table.Row>
-              </Table.Body>
-            </Table>
-          </Form>
-        </Modal.Content>
-        <Modal.Actions>
-          <Button
-            content="Sign In"
-            labelPosition="right"
-            icon="checkmark"
-            onClick={ () => setModal(false) }
-            positive
-          />
-          <Button
-            content="cancel"
-            color="black"
-            onClick={ () => setModal(false) }
-          />
-        </Modal.Actions>
-      </Modal>
+      <CreateUserModal />
     </>
   );
 }
