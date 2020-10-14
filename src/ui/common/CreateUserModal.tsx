@@ -3,9 +3,14 @@ import {
   Button, Form, Input, Modal, Table,
 } from 'semantic-ui-react';
 import useUser from 'hooks/useUser';
+import { Message } from 'config';
+import useCommon from 'hooks/useCommon';
+import { AlertModal } from './index';
 
 function CreateUserModal() {
   const { user, handleCreateUserModalFn } = useUser();
+  const { common, handleAlertModalFn, setAlertModalFn } = useCommon();
+
   const [userId, setUserId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -32,8 +37,17 @@ function CreateUserModal() {
   };
 
   const signIn = () => {
-    handleCreateUserModalFn(false);
+    // handleCreateUserModalFn(false);
     console.log(`${userId} ${password} ${passwordConfirm} ${name}`);
+
+    if (password !== passwordConfirm) {
+      console.log('check password');
+    }
+
+    // api call
+
+    setAlertModalFn(Message.alert, Message.password_fail);
+    handleAlertModalFn(true);
   };
 
   const closeModal = () => {
@@ -116,6 +130,8 @@ function CreateUserModal() {
           />
         </Modal.Actions>
       </Modal>
+
+      <AlertModal />
     </>
   );
 }
