@@ -6,6 +6,9 @@ import useUser from 'hooks/useUser';
 import { Message } from 'config';
 import useCommon from 'hooks/useCommon';
 import { AlertModal } from './index';
+import { default as axiosInstance } from '../../util/AxiosUtil';
+
+const axios = axiosInstance.instance;
 
 function CreateUserModal() {
   const { user, handleCreateUserModalFn } = useUser();
@@ -36,18 +39,37 @@ function CreateUserModal() {
     setName(name);
   };
 
-  const signIn = () => {
+  const signIn = async () => {
     // handleCreateUserModalFn(false);
     console.log(`${userId} ${password} ${passwordConfirm} ${name}`);
 
     if (password !== passwordConfirm) {
       console.log('check password');
+
+      setAlertModalFn(Message.alert, Message.password_fail);
+      handleAlertModalFn(true);
+
+      return;
     }
 
     // api call
+    const payload = {
+      userId,
+      password,
+      name,
+    };
 
-    setAlertModalFn(Message.alert, Message.password_fail);
-    handleAlertModalFn(true);
+    await axios.post('/signIn', payload).then((data) => {
+      console.log(data);
+      if (data.data.status) {
+        setAlertModalFn(Message.alert, Message.signIn_success);
+        handleAlertModalFn(true);
+        handleCreateUserModalFn(false);
+      } else {
+        setAlertModalFn(Message.alert, Message.userId_fail);
+        handleAlertModalFn(true);
+      }
+    });
   };
 
   const closeModal = () => {

@@ -11,9 +11,9 @@ class AxiosUtil {
     this.instance.interceptors.request.use((config: AxiosRequestConfig) => {
       const jwtToken = localStorage.getItem(Constant.JWT_TOKEN);
 
-      console.log(jwtToken);
+      // console.log(jwtToken);
 
-      if (jwtToken !== '') {
+      if (jwtToken) {
         // header 에 token 세팅
         // eslint-disable-next-line no-param-reassign
         config.headers.common.Authorization = `Bearer ${jwtToken}`;
