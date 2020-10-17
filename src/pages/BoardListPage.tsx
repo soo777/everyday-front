@@ -6,10 +6,13 @@ import useBoard from 'hooks/useBoard';
 import { CreateBoardModal } from 'ui/board';
 import { AppLayout } from 'ui/layout';
 import { default as axiosInstance } from 'util/AxiosUtil';
+import { RouteComponentProps } from 'react-router-dom';
+import BoardModel from '../model/BoardModel';
+import { Constant } from '../config';
 
 const axios = axiosInstance.instance;
 
-function BoardListPage() {
+function BoardListPage(routesProps: RouteComponentProps) {
   // const [createModal, setCreateModal] = useState(false);
 
   const { board, getBoardListFn, setCreateBoardModalFn } = useBoard();
@@ -26,8 +29,12 @@ function BoardListPage() {
     getBoardList().then((r) => {});
   }, []);
 
-  const clickBoard = (board:any) => {
+  const clickBoard = (board:BoardModel) => {
     console.log(board);
+
+    localStorage.setItem(Constant.BOARD_KEY, board.boardKey);
+
+    routesProps.history.push('/board');
   };
 
   const createBoard = () => {

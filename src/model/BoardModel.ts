@@ -1,10 +1,10 @@
 class BoardModel {
-  boardId:string;
+  boardKey:string;
 
   boardName:string;
 
   constructor() {
-    this.boardId = '';
+    this.boardKey = '';
     this.boardName = '';
   }
 }

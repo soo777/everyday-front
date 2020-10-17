@@ -8,7 +8,7 @@ function Routes() {
   return (
     <>
       <Switch>
-        <Route path="/boardList" render={ (props) => <BoardListPage /> } />
+        <Route path="/boardList" render={ (props) => <BoardListPage { ...props } /> } />
         <Route path="/board" render={ (props) => <BoardPage /> } />
         <Route path="/" render={ (props) => <LoginPage { ...props } /> } />
       </Switch>

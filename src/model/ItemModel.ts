@@ -1,7 +1,7 @@
 class ItemModel {
-  itemId:string;
+  itemKey:string;
 
-  boardId:string;
+  boardKey:string;
 
   content:string;
 
@@ -14,8 +14,8 @@ class ItemModel {
   updateDate:string;
 
   constructor() {
-    this.itemId = '';
-    this.boardId = '';
+    this.itemKey = '';
+    this.boardKey = '';
     this.content = '';
     this.star = '';
     this.creator = '';

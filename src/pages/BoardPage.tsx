@@ -6,6 +6,7 @@ import { AppLayout, Item } from 'ui';
 import useItem from 'hooks/useItem';
 import ItemModel from 'model/ItemModel';
 import { default as axiosInstance } from 'util/AxiosUtil';
+import { Constant } from '../config';
 
 const axios = axiosInstance.instance;
 
@@ -15,6 +16,12 @@ function BoardPage() {
   const [content, setContent] = useState<string | number | undefined>('');
 
   const getItemList = async () => {
+    const boardKey = localStorage.getItem(Constant.BOARD_KEY);
+
+    const payload = {
+      boardKey,
+    };
+
     await axios.get('/item').then((data) => {
       console.log(data.data.object);
       getItemListFn(data.data.object);

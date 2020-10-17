@@ -42,7 +42,7 @@ function LoginPage(routesProps: RouteComponentProps) {
         console.log('login success');
         localStorage.setItem(Constant.JWT_TOKEN, data.data.object);
 
-        routesProps.history.push('/board');
+        routesProps.history.push('/boardList');
       } else {
         console.log('login fail');
       }
