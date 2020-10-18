@@ -19,10 +19,12 @@ function BoardPage() {
     const boardKey = localStorage.getItem(Constant.BOARD_KEY);
 
     const payload = {
-      boardKey,
+      params: {
+        boardKey,
+      },
     };
 
-    await axios.get('/item').then((data) => {
+    await axios.get('/item', payload).then((data) => {
       console.log(data.data.object);
       getItemListFn(data.data.object);
     });
@@ -37,11 +39,14 @@ function BoardPage() {
   };
 
   const createItem = async () => {
+    const boardKey = localStorage.getItem(Constant.BOARD_KEY);
+
     console.log('create item');
     console.log(content);
 
     const payload = {
       content,
+      boardKey,
     };
 
     await axios.post('/item', payload).then((data) => {
@@ -80,6 +85,7 @@ function BoardPage() {
                 item.itemList
                   ? item.itemList.map((itemList:ItemModel, index:number) => (
                     <Item
+                      key={ itemList.itemKey }
                       item={ itemList }
                     />
                   ))
