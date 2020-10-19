@@ -44,6 +44,11 @@ function BoardPage() {
     console.log('create item');
     console.log(content);
 
+    if (content === '') {
+      alert('empty content');
+      return;
+    }
+
     const payload = {
       content,
       boardKey,

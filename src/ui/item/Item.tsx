@@ -1,12 +1,37 @@
 import React from 'react';
-import { Header, Icon, Comment } from 'semantic-ui-react';
+import {
+  Header, Icon, Comment, Dropdown,
+} from 'semantic-ui-react';
 import ItemModel from '../../model/ItemModel';
+import { default as axiosInstance } from '../../util/AxiosUtil';
+import useItem from '../../hooks/useItem';
+
+const axios = axiosInstance.instance;
 
 type Props = {
   item: ItemModel;
 };
 
 function Item({ item }:Props) {
+  const { getItemListFn } = useItem();
+
+  const deleteItem = async () => {
+    console.log(item);
+
+    const payload = {
+      params: {
+        itemKey: item.itemKey,
+      },
+    };
+
+    await axios.delete('/item', payload).then((data) => {
+      console.log(data);
+      if (data.data.status) {
+        // getItemListFn(data.data.object);
+      }
+    });
+  };
+
   return (
     <>
       { /* <div className="item"> */ }
@@ -25,7 +50,14 @@ function Item({ item }:Props) {
           <Comment.Content>
             <Comment.Author>
               { item.creator }
-              <Icon name="options" className="option" />
+
+              <Dropdown icon="options" className="option">
+                <Dropdown.Menu>
+                  <Dropdown.Item text="Delete" onClick={ deleteItem } />
+                  { /* <Dropdown.Item text='E-mail Collaborators' /> */ }
+                </Dropdown.Menu>
+              </Dropdown>
+
             </Comment.Author>
             <Comment.Metadata>
               <div>{ item.createDate }</div>
