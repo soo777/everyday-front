@@ -49,8 +49,18 @@
           float: right;
         }
 
-        .modify_input {
-          width: 100%;
+        .modify_textarea {
+          max-width: 100%;
+          min-width: 100%;
+          min-height: 6vh;
+          max-height: 6vh;
+        }
+
+        .reply_textarea {
+          max-width: 100%;
+          min-width: 100%;
+          min-height: 4vh;
+          max-height: 4vh;
         }
       }
 

@@ -18,6 +18,8 @@ function Item({ item }:Props) {
 
   const [modifyBool, setModifyBool] = useState<boolean>(false);
   const [modifyText, setModifyText] = useState<string | number | undefined>(item.content);
+  const [replyBool, setReplyBool] = useState<boolean>(false);
+  const [replyText, setReplyText] = useState<string | number | undefined>('');
 
   const getItemList = async () => {
     const boardKey = localStorage.getItem(Constant.BOARD_KEY);
@@ -55,6 +57,10 @@ function Item({ item }:Props) {
     setModifyBool(true);
   };
 
+  const cancelModifyItem = () => {
+    setModifyBool(false);
+  };
+
   const handleModifyInput = (e: SyntheticEvent, data: TextAreaProps) => {
     console.log(data.value);
     setModifyText(data.value);
@@ -69,10 +75,23 @@ function Item({ item }:Props) {
     await axios.put('/item', payload).then((data) => {
       console.log(data);
       if (data.data.status) {
-        setModifyBool(false)
+        setModifyBool(false);
         getItemList().then((r) => {});
       }
     });
+  };
+
+  const handleReply = () => {
+    setReplyBool(true);
+  };
+
+  const cancelReply = () => {
+    setReplyBool(false);
+  };
+
+  const handleReplyInput = (e: SyntheticEvent, data: TextAreaProps) => {
+    console.log(data.value);
+    setReplyText(data.value);
   };
 
   return (
@@ -105,11 +124,12 @@ function Item({ item }:Props) {
                   ? (
                     <>
                       <TextArea
-                        className="modify_input"
+                        className="modify_textarea"
                         value={ modifyText }
                         onChange={ handleModifyInput }
                       />
                       <Button onClick={ modifyItem }>modify</Button>
+                      <Button onClick={ cancelModifyItem }>cancel</Button>
                     </>
                   )
                   : (
@@ -117,6 +137,35 @@ function Item({ item }:Props) {
                   )
               }
             </Comment.Text>
+
+            { /* reply */ }
+            <Comment.Content>
+              <span onClick={ handleReply }>reply</span>
+            </Comment.Content>
+
+            { /*  reply comment */ }
+            {
+              replyBool
+                ? (
+                  <Comment.Group>
+                    <div>
+                      <TextArea
+                        className="reply_textarea"
+                        value={ replyText }
+                        onChange={handleReplyInput}
+                      />
+                    </div>
+                    <div>
+                      <Button>save</Button>
+                      <Button onClick={ cancelReply }>cancel</Button>
+                    </div>
+                  </Comment.Group>
+                )
+                : (
+                  ''
+                )
+            }
+
           </Comment.Content>
         </Comment>
       </Comment.Group>
