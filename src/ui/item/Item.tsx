@@ -6,6 +6,7 @@ import ItemModel from '../../model/ItemModel';
 import { default as axiosInstance } from '../../util/AxiosUtil';
 import useItem from '../../hooks/useItem';
 import { Constant } from '../../config';
+import CommentModel from '../../model/CommentModel';
 
 const axios = axiosInstance.instance;
 
@@ -62,7 +63,6 @@ function Item({ item }:Props) {
   };
 
   const handleModifyInput = (e: SyntheticEvent, data: TextAreaProps) => {
-    console.log(data.value);
     setModifyText(data.value);
   };
 
@@ -90,8 +90,23 @@ function Item({ item }:Props) {
   };
 
   const handleReplyInput = (e: SyntheticEvent, data: TextAreaProps) => {
-    console.log(data.value);
     setReplyText(data.value);
+  };
+
+  const saveReply = async () => {
+    const payload = {
+      itemKey: item.itemKey,
+      content: replyText,
+      creator: 'soo',
+    };
+
+    await axios.post('/comment', payload).then((data) => {
+      console.log(data);
+      if (data.data.status) {
+        setReplyBool(false);
+        getItemList().then((r) => {});
+      }
+    });
   };
 
   return (
@@ -138,12 +153,20 @@ function Item({ item }:Props) {
               }
             </Comment.Text>
 
-            { /* reply */ }
-            <Comment.Content>
-              <span onClick={ handleReply }>reply</span>
-            </Comment.Content>
+            { /* comment */ }
+            {
+              item.comment.length
+                ? (
+                  item.comment.map((commentList:CommentModel, index:number) => (
+                    <Comment.Group>
+                      { commentList.content }
+                    </Comment.Group>
+                  ))
+                ) : ''
+            }
+            { /* comment */ }
 
-            { /*  reply comment */ }
+            { /*  reply */ }
             {
               replyBool
                 ? (
@@ -152,19 +175,22 @@ function Item({ item }:Props) {
                       <TextArea
                         className="reply_textarea"
                         value={ replyText }
-                        onChange={handleReplyInput}
+                        onChange={ handleReplyInput }
                       />
                     </div>
                     <div>
-                      <Button>save</Button>
+                      <Button onClick={ saveReply }>save</Button>
                       <Button onClick={ cancelReply }>cancel</Button>
                     </div>
                   </Comment.Group>
                 )
                 : (
-                  ''
+                  <Comment.Content>
+                    <span onClick={ handleReply }>reply</span>
+                  </Comment.Content>
                 )
             }
+            { /*  reply */ }
 
           </Comment.Content>
         </Comment>

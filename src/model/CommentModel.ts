@@ -1,7 +1,7 @@
-class ItemModel {
-  itemKey:string;
+class CommentModel {
+  commentKey:string;
 
-  boardKey:string;
+  itemKey:string;
 
   content:string;
 
@@ -13,18 +13,18 @@ class ItemModel {
 
   updateDate:string;
 
-  comment:any;
+  status:boolean;
 
   constructor() {
+    this.commentKey = '';
     this.itemKey = '';
-    this.boardKey = '';
     this.content = '';
     this.star = '';
     this.creator = '';
     this.createDate = '';
     this.updateDate = '';
-    this.comment = [];
+    this.status = false;
   }
 }
 
-export default ItemModel;
+export default CommentModel;
