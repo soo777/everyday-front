@@ -1,15 +1,17 @@
 .board {
-  height: 830px;
+  //height: 830px;
+  padding-top: 43px;
+  padding-bottom: 30px;
 
   .nav {
     width: 20%;
-    height: 100%;
+    //height: 100%;
     float: left;
     background-color: cadetblue;
   }
   .middle.content {
     width: 60%;
-    height: 100%;
+    //height: 100%;
     float: left;
     padding: 10px;
     background-color: beige;
@@ -67,23 +69,13 @@
           padding: unset;
         }
       }
-
-      //.item {
-      //  margin-bottom: 50px;
-      //
-      //  i {
-      //    float: right;
-      //    font-size: 15px;
-      //    cursor: pointer;
-      //  }
-      //}
     }
 
 
   }
   .sideBar {
     width: 20%;
-    height: 100%;
+    //height: 100%;
     float: left;
     background-color: darkgrey;
   }
