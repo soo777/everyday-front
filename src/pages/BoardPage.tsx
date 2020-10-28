@@ -24,7 +24,7 @@ function BoardPage() {
       },
     };
 
-    await axios.get('/item', payload).then((data) => {
+    await axios.get('/api/v1/item', payload).then((data) => {
       console.log(data.data.object);
       getItemListFn(data.data.object);
     });
@@ -54,7 +54,7 @@ function BoardPage() {
       boardKey,
     };
 
-    await axios.post('/item', payload).then((data) => {
+    await axios.post('/api/v1/item', payload).then((data) => {
       console.log(data);
 
       if (data.data.status === true) {
@@ -68,7 +68,7 @@ function BoardPage() {
     <>
       <AppLayout>
         <div className="board">
-          <div className="nav">
+          <div className="leftBar">
             sidebar
           </div>
           <div className="middle content">
@@ -99,7 +99,7 @@ function BoardPage() {
               </div>
             </div>
           </div>
-          <div className="sideBar">
+          <div className="rightBar">
             sidebar
           </div>
         </div>

@@ -15,7 +15,7 @@ function CreateBoardModal() {
   };
 
   const getBoardList = async () => {
-    await axios.get('/board').then((data) => {
+    await axios.get('/api/v1/board').then((data) => {
       const list = data.data.object;
       console.log(list);
       getBoardListFn(list);
@@ -29,7 +29,7 @@ function CreateBoardModal() {
       boardName: boardInput,
     };
 
-    await axios.post('/board', payload).then((data) => {
+    await axios.post('/api/v1/board', payload).then((data) => {
       console.log(data);
 
       if (data.data.status === true) {

@@ -15,7 +15,7 @@ function Test() {
       setLoading(true);
 
       const response = await axios.get(
-        '/test',
+        '/api/v1/test',
       );
       setUsers(response.data);
     } catch (e) {

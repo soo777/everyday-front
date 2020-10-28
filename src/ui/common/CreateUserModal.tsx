@@ -59,7 +59,7 @@ function CreateUserModal() {
       name,
     };
 
-    await axios.post('/signIn', payload).then((data) => {
+    await axios.post('/api/v1/signIn', payload).then((data) => {
       console.log(data);
       if (data.data.status) {
         setAlertModalFn(Message.alert, Message.signIn_success);

@@ -18,7 +18,7 @@ function BoardListPage(routesProps: RouteComponentProps) {
   const { board, getBoardListFn, setCreateBoardModalFn } = useBoard();
 
   const getBoardList = async () => {
-    await axios.get('/board').then((data) => {
+    await axios.get('/api/v1/board').then((data) => {
       const list = data.data.object;
       console.log(list);
       getBoardListFn(list);

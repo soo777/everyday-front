@@ -31,7 +31,7 @@ function Item({ item }:Props) {
       },
     };
 
-    await axios.get('/item', payload).then((data) => {
+    await axios.get('/api/v1/item', payload).then((data) => {
       console.log(data.data.object);
       getItemListFn(data.data.object);
     });
@@ -46,7 +46,7 @@ function Item({ item }:Props) {
       },
     };
 
-    await axios.delete('/item', payload).then((data) => {
+    await axios.delete('/api/v1/item', payload).then((data) => {
       console.log(data);
       if (data.data.status) {
         getItemList().then((r) => {});
@@ -72,7 +72,7 @@ function Item({ item }:Props) {
       content: modifyText,
     };
 
-    await axios.put('/item', payload).then((data) => {
+    await axios.put('/api/v1/item', payload).then((data) => {
       console.log(data);
       if (data.data.status) {
         setModifyBool(false);
@@ -100,7 +100,7 @@ function Item({ item }:Props) {
       creator: 'soo',
     };
 
-    await axios.post('/comment', payload).then((data) => {
+    await axios.post('/api/v1/comment', payload).then((data) => {
       console.log(data);
       if (data.data.status) {
         setReplyBool(false);

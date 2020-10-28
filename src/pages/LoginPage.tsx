@@ -36,7 +36,7 @@ function LoginPage(routesProps: RouteComponentProps) {
       password,
     };
 
-    await axios.post('/authenticate', payload).then((data) => {
+    await axios.post('/api/v1/authenticate', payload).then((data) => {
       console.log(data);
       if (data.status === 200) {
         console.log('login success');
