@@ -1,6 +1,8 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent, FormEvent, SyntheticEvent, useEffect, useState,
+} from "react";
 import {
-  Button, Header, Icon, TextArea, TextAreaProps,
+  Button, Header, Icon, Input, TextArea, TextAreaProps,
 } from 'semantic-ui-react';
 import { AppLayout, Item } from 'ui';
 import useItem from 'hooks/useItem';
@@ -14,6 +16,9 @@ function BoardPage() {
   const { item, getItemListFn } = useItem();
 
   const [content, setContent] = useState<string | number | undefined>('');
+
+  const [file, setFile] = useState();
+  const [previewUrl, setPreviewUrl] = useState<any>('');
 
   const getItemList = async () => {
     const boardKey = localStorage.getItem(Constant.BOARD_KEY);
@@ -34,8 +39,14 @@ function BoardPage() {
     getItemList().then((r) => {});
   }, []);
 
-  const handleContentArea = (e: SyntheticEvent, data: TextAreaProps) => {
-    setContent(data.value);
+  // textarea
+  // const handleContentArea = (e: SyntheticEvent, data: TextAreaProps) => {
+  //   setContent(data.value);
+  // };
+
+  const handleContentArea = (e: FormEvent<HTMLDivElement>) => {
+    console.log(e.currentTarget.textContent);
+    // setContent(data.value);
   };
 
   const createItem = async () => {
@@ -64,6 +75,25 @@ function BoardPage() {
     });
   };
 
+  // file upload
+  const handleFileUpload = (e: any, data: object) => {
+    e.preventDefault();
+    console.log(e);
+    console.log(data);
+
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    console.log(reader);
+    console.log(file);
+
+    reader.onload = () => {
+      setFile(file);
+      setPreviewUrl(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <>
       <AppLayout>
@@ -75,11 +105,43 @@ function BoardPage() {
             <div>
               { /* 입력 박스 */ }
               <div className="createItem">
-                <TextArea
-                  placeholder="오늘 무엇을 하셨나요?"
-                  value={ content }
-                  onChange={ handleContentArea }
-                />
+                <div
+                  contentEditable
+                  data-ph="오늘 무엇을 하셨나요?"
+                  className="editableDiv"
+                  onInput={ handleContentArea }
+                >
+                  {
+                    previewUrl
+                      ? <img src={ previewUrl } alt="alt" />
+                      : ''
+                  }
+                </div>
+
+                {/*<TextArea*/}
+                {/*  placeholder="오늘 무엇을 하셨나요?"*/}
+                {/*  value={ content }*/}
+                {/*  onChange={ handleContentArea }*/}
+                {/*/>*/}
+
+                { /* file upload */ }
+                { /* { */ }
+                { /*  previewUrl */ }
+                { /*    ? <img src={ previewUrl } alt="alt" /> */ }
+                { /*    : '' */ }
+                { /* } */ }
+                <div className="fileBox">
+                  { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }
+                  <label htmlFor="ex_file">upload</label>
+                  <Input
+                    type="file"
+                    accept="image/jpg, image/jpeg, image/png"
+                    onChange={ handleFileUpload }
+                    id="ex_file"
+                  />
+                </div>
+                { /* file upload */ }
+
                 <div className="save">
                   <Button onClick={ createItem }>저장</Button>
                 </div>
