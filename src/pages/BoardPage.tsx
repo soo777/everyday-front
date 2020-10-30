@@ -1,6 +1,6 @@
 import React, {
   ChangeEvent, FormEvent, SyntheticEvent, useEffect, useState,
-} from "react";
+} from 'react';
 import {
   Button, Header, Icon, Input, TextArea, TextAreaProps,
 } from 'semantic-ui-react';
@@ -15,7 +15,7 @@ const axios = axiosInstance.instance;
 function BoardPage() {
   const { item, getItemListFn } = useItem();
 
-  const [content, setContent] = useState<string | number | undefined>('');
+  const [content, setContent] = useState<string | number | undefined | null>('');
 
   const [file, setFile] = useState();
   const [previewUrl, setPreviewUrl] = useState<any>('');
@@ -46,7 +46,7 @@ function BoardPage() {
 
   const handleContentArea = (e: FormEvent<HTMLDivElement>) => {
     console.log(e.currentTarget.textContent);
-    // setContent(data.value);
+    setContent(e.currentTarget.textContent);
   };
 
   const createItem = async () => {
@@ -104,46 +104,41 @@ function BoardPage() {
           <div className="middle content">
             <div>
               { /* 입력 박스 */ }
-              <div className="createItem">
-                <div
-                  contentEditable
-                  data-ph="오늘 무엇을 하셨나요?"
-                  className="editableDiv"
-                  onInput={ handleContentArea }
-                >
-                  {
-                    previewUrl
-                      ? <img src={ previewUrl } alt="alt" />
-                      : ''
-                  }
-                </div>
-
-                {/*<TextArea*/}
-                {/*  placeholder="오늘 무엇을 하셨나요?"*/}
-                {/*  value={ content }*/}
-                {/*  onChange={ handleContentArea }*/}
-                {/*/>*/}
-
-                { /* file upload */ }
-                { /* { */ }
-                { /*  previewUrl */ }
-                { /*    ? <img src={ previewUrl } alt="alt" /> */ }
-                { /*    : '' */ }
-                { /* } */ }
-                <div className="fileBox">
-                  { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }
-                  <label htmlFor="ex_file">upload</label>
-                  <Input
-                    type="file"
-                    accept="image/jpg, image/jpeg, image/png"
-                    onChange={ handleFileUpload }
-                    id="ex_file"
+              <div className={ previewUrl ? 'createItem max' : 'createItem min' }>
+                <div style={ { border: '1px solid black' } }>
+                  <div>
+                    {
+                      previewUrl
+                        ? (
+                          <img src={ previewUrl } alt="alt" style={ { height: '150px' } } />
+                        )
+                        : ''
+                    }
+                  </div>
+                  <div
+                    contentEditable
+                    data-ph="오늘 무엇을 하셨나요?"
+                    className="editableDiv"
+                    onInput={ handleContentArea }
                   />
                 </div>
-                { /* file upload */ }
 
                 <div className="save">
-                  <Button onClick={ createItem }>저장</Button>
+                  { /* file upload */ }
+                  <div className="fileBox">
+                    { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }
+                    <label htmlFor="ex_file">
+                      <Icon name="plus" />
+                    </label>
+                    <Input
+                      type="file"
+                      accept="image/jpg, image/jpeg, image/png"
+                      onChange={ handleFileUpload }
+                      id="ex_file"
+                    />
+                    <Button onClick={ createItem }>저장</Button>
+                  </div>
+                  { /* file upload */ }
                 </div>
               </div>
               { /* 리스트 */ }

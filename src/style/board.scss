@@ -18,7 +18,7 @@
     background-color: beige;
 
     .createItem {
-      height: 150px;
+      //height: 150px;
       padding: 5px;
       margin-bottom: 30px;
       background-color: aquamarine;
@@ -26,20 +26,12 @@
       .editableDiv {
         height: 100px;
         overflow-y: auto;
-        border: 1px solid black;
+        //border: 1px solid black;
       }
 
       // dive contentEditable placeholder
       [contentEditable=true]:empty:not(:focus):before{
         content:attr(data-ph)
-      }
-
-      TextArea {
-        min-width: 100%;
-        max-width: 100%;
-        min-height: 100px;
-        max-height: 100px;
-        padding: 10px;
       }
 
       .save {
@@ -55,6 +47,7 @@
         display: inline-block;
         padding: .5em .75em;
         color: #999;
+        float: left;
         font-size: inherit;
         line-height: normal;
         vertical-align: middle;
@@ -76,6 +69,16 @@
         border: 0;
       }
       // file upload button
+    }
+
+    // createItem min
+    .min {
+      height: 150px;
+    }
+
+    // createItem max
+    .max {
+      height: 300px;
     }
 
     .itemList {
