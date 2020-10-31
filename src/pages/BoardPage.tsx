@@ -17,7 +17,7 @@ function BoardPage() {
 
   const [content, setContent] = useState<string | number | undefined | null>('');
 
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<any>();
   const [previewUrl, setPreviewUrl] = useState<any>('');
 
   const getItemList = async () => {
@@ -39,11 +39,6 @@ function BoardPage() {
     getItemList().then((r) => {});
   }, []);
 
-  // textarea
-  // const handleContentArea = (e: SyntheticEvent, data: TextAreaProps) => {
-  //   setContent(data.value);
-  // };
-
   const handleContentArea = (e: FormEvent<HTMLDivElement>) => {
     console.log(e.currentTarget.textContent);
     setContent(e.currentTarget.textContent);
@@ -52,34 +47,38 @@ function BoardPage() {
   const createItem = async () => {
     const boardKey = localStorage.getItem(Constant.BOARD_KEY);
 
-    console.log('create item');
-    console.log(content);
-
     if (content === '') {
       alert('empty content');
       return;
     }
 
-    const payload = {
-      content,
-      boardKey,
-    };
+    console.log(file);
 
-    await axios.post('/api/v1/item', payload).then((data) => {
+    const formData = new FormData();
+    formData.append('boardKey', boardKey!);
+    formData.append('content', content!.toString());
+    formData.append('file', file);
+
+    // file upload test
+    await axios.post('/api/v1/item/file', formData).then((data) => {
       console.log(data);
-
-      if (data.data.status === true) {
-        setContent('');
-        getItemList().then((r) => {});
-      }
     });
+
+    // 기존 create item
+    // await axios.post('/api/v1/item', payload).then((data) => {
+    //   console.log(data);
+    //
+    //   if (data.data.status === true) {
+    //     setContent('');
+    //     getItemList().then((r) => {});
+    //   }
+    // });
   };
 
   // file upload
   const handleFileUpload = (e: any, data: object) => {
     e.preventDefault();
     console.log(e);
-    console.log(data);
 
     const reader = new FileReader();
     const file = e.target.files[0];
