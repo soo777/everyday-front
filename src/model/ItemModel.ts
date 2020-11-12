@@ -15,6 +15,8 @@ class ItemModel {
 
   comment:any;
 
+  files:any
+
   constructor() {
     this.itemKey = '';
     this.boardKey = '';
@@ -24,6 +26,7 @@ class ItemModel {
     this.createDate = '';
     this.updateDate = '';
     this.comment = [];
+    this.files = [];
   }
 }
 

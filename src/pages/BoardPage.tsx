@@ -8,6 +8,7 @@ import { AppLayout, Item } from 'ui';
 import useItem from 'hooks/useItem';
 import ItemModel from 'model/ItemModel';
 import { default as axiosInstance } from 'util/AxiosUtil';
+import ContentEditable from 'react-contenteditable';
 import { Constant } from '../config';
 
 const axios = axiosInstance.instance;
@@ -15,7 +16,7 @@ const axios = axiosInstance.instance;
 function BoardPage() {
   const { item, getItemListFn } = useItem();
 
-  const [content, setContent] = useState<string | number | undefined | null>('');
+  const [content, setContent] = useState<string>('');
 
   const [file, setFile] = useState<any>();
   const [previewUrl, setPreviewUrl] = useState<any>('');
@@ -39,9 +40,14 @@ function BoardPage() {
     getItemList().then((r) => {});
   }, []);
 
-  const handleContentArea = (e: FormEvent<HTMLDivElement>) => {
-    console.log(e.currentTarget.textContent);
-    setContent(e.currentTarget.textContent);
+  // const handleContentArea = (e: FormEvent<HTMLDivElement>) => {
+  //   console.log(e.currentTarget.textContent);
+  //   setContent(e.currentTarget.textContent);
+  // }
+
+  const handleContentArea = (e: any) => {
+    console.log(e.target.value);
+    setContent(e.target.value);
   };
 
   const createItem = async () => {
@@ -52,6 +58,7 @@ function BoardPage() {
       return;
     }
 
+    console.log(content);
     console.log(file);
 
     const formData = new FormData();
@@ -59,10 +66,18 @@ function BoardPage() {
     formData.append('content', content!.toString());
     formData.append('file', file);
 
-    // file upload test
-    await axios.post('/api/v1/item/file', formData).then((data) => {
-      console.log(data);
-    });
+    // file upload
+    // await axios.post('/api/v1/item/file', formData).then((data) => {
+    //   console.log(data);
+    //
+    //   if (data.data.status === true) {
+    //     setContent('');
+    //     getItemList().then((r) => {});
+    //   }
+    // });
+
+    setPreviewUrl('');
+    setContent('');
 
     // 기존 create item
     // await axios.post('/api/v1/item', payload).then((data) => {
@@ -114,11 +129,19 @@ function BoardPage() {
                         : ''
                     }
                   </div>
-                  <div
-                    contentEditable
-                    data-ph="오늘 무엇을 하셨나요?"
+                  { /* <div */ }
+                  { /*  contentEditable */ }
+                  { /*  data-ph="오늘 무엇을 하셨나요?" */ }
+                  { /*  className="editableDiv" */ }
+                  { /*  onInput={ handleContentArea } */ }
+                  { /* /> */ }
+                  <ContentEditable
+                    html={ content }
+                    onChange={ handleContentArea }
+                    disabled={ false }
                     className="editableDiv"
-                    onInput={ handleContentArea }
+                    data-ph="오늘 무엇을 하셨나요?"
+                    onSubmit={ () => false }
                   />
                 </div>
 

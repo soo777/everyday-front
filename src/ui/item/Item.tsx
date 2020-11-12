@@ -1,12 +1,13 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import {
   Icon, Comment, Dropdown, TextArea, Button, TextAreaProps,
-} from 'semantic-ui-react';
-import ItemModel from '../../model/ItemModel';
-import { default as axiosInstance } from '../../util/AxiosUtil';
-import useItem from '../../hooks/useItem';
-import { Constant } from '../../config';
-import CommentModel from '../../model/CommentModel';
+} from "semantic-ui-react";
+import ItemModel from "../../model/ItemModel";
+import { default as axiosInstance } from "../../util/AxiosUtil";
+import useItem from "../../hooks/useItem";
+import { Constant } from "../../config";
+import qs from "qs";
+import CommentModel from "../../model/CommentModel";
 
 const axios = axiosInstance.instance;
 
@@ -14,13 +15,47 @@ type Props = {
   item: ItemModel;
 };
 
-function Item({ item }:Props) {
+function Item ({ item }: Props) {
   const { getItemListFn } = useItem();
 
   const [modifyBool, setModifyBool] = useState<boolean>(false);
   const [modifyText, setModifyText] = useState<string | number | undefined>(item.content);
   const [replyBool, setReplyBool] = useState<boolean>(false);
-  const [replyText, setReplyText] = useState<string | number | undefined>('');
+  const [replyText, setReplyText] = useState<string | number | undefined>("");
+  const [img, setImg] = useState<any>();
+
+  const getFileImage = async () => {
+    console.log(item.files);
+
+    const filePathArr: string[] = [];
+
+    item.files.forEach((file: any) => {
+      filePathArr.push(file.path);
+    });
+
+    console.log(filePathArr);
+
+    // file base 가져오는 api
+    const payload = {
+      params: {
+        filePath: filePathArr,
+      },
+      paramsSerializer: (params: any) => qs.stringify(params, { arrayFormat: "repeat" }),
+    };
+
+    await axios.get("/api/v1/item/file", payload).then((data) => {
+      console.log(data.data.object);
+
+      const { img } = data.data.object;
+      setImg(img);
+
+      console.log(img);
+    });
+  };
+
+  useEffect(() => {
+    getFileImage().then();
+  }, []);
 
   const getItemList = async () => {
     const boardKey = localStorage.getItem(Constant.BOARD_KEY);
@@ -31,7 +66,7 @@ function Item({ item }:Props) {
       },
     };
 
-    await axios.get('/api/v1/item', payload).then((data) => {
+    await axios.get("/api/v1/item", payload).then((data) => {
       console.log(data.data.object);
       getItemListFn(data.data.object);
     });
@@ -46,7 +81,7 @@ function Item({ item }:Props) {
       },
     };
 
-    await axios.delete('/api/v1/item', payload).then((data) => {
+    await axios.delete("/api/v1/item", payload).then((data) => {
       console.log(data);
       if (data.data.status) {
         getItemList().then((r) => {});
@@ -72,7 +107,7 @@ function Item({ item }:Props) {
       content: modifyText,
     };
 
-    await axios.put('/api/v1/item', payload).then((data) => {
+    await axios.put("/api/v1/item", payload).then((data) => {
       console.log(data);
       if (data.data.status) {
         setModifyBool(false);
@@ -97,10 +132,10 @@ function Item({ item }:Props) {
     const payload = {
       itemKey: item.itemKey,
       content: replyText,
-      creator: 'soo',
+      creator: "soo",
     };
 
-    await axios.post('/api/v1/comment', payload).then((data) => {
+    await axios.post("/api/v1/comment", payload).then((data) => {
       console.log(data);
       if (data.data.status) {
         setReplyBool(false);
@@ -113,24 +148,24 @@ function Item({ item }:Props) {
     <>
       <Comment.Group>
         <Comment>
-          <Comment.Avatar as="a" src="/images/non_user.png" />
+          <Comment.Avatar as="a" src="/images/non_user.png"/>
           <Comment.Content>
             <Comment.Author>
-              { item.creator }
+              {item.creator}
 
               <Dropdown icon="options" className="option">
                 <Dropdown.Menu>
-                  <Dropdown.Item text="Modify" onClick={ handleModifyItem } />
-                  <Dropdown.Item text="Delete" onClick={ deleteItem } />
+                  <Dropdown.Item text="Modify" onClick={handleModifyItem}/>
+                  <Dropdown.Item text="Delete" onClick={deleteItem}/>
                 </Dropdown.Menu>
               </Dropdown>
 
             </Comment.Author>
             <Comment.Metadata>
-              <div>{ item.createDate }</div>
+              <div>{item.createDate}</div>
               <div>
-                <Icon name="star" />
-                { item.star }
+                <Icon name="star"/>
+                {item.star}
               </div>
             </Comment.Metadata>
             <Comment.Text>
@@ -140,33 +175,53 @@ function Item({ item }:Props) {
                     <>
                       <TextArea
                         className="modify_textarea"
-                        value={ modifyText }
-                        onChange={ handleModifyInput }
+                        value={modifyText}
+                        onChange={handleModifyInput}
                       />
-                      <Button onClick={ modifyItem }>modify</Button>
-                      <Button onClick={ cancelModifyItem }>cancel</Button>
+                      <Button onClick={modifyItem}>modify</Button>
+                      <Button onClick={cancelModifyItem}>cancel</Button>
                     </>
                   )
                   : (
-                    item.content
+                    // item.content
+                    <div>
+                      {
+                        // item.files.map((file:any, index:number) => (
+                        //   // <img src={ file.path } alt="aa" />
+                        //   // <img src="/Users/moonsungsoo/gitlab/file/cfe15581483a455baf1fbcc119012ea2.jpeg" alt="aa" />
+                        //   <img src={ img } alt="aa" />
+                        // ))
+                      }
+                      {
+                        img ? (
+                            img.map((img: string) => (
+                              <img src={img} alt="image"/>
+                            ))
+                          )
+                          : ""
+                      }
+                      {
+                        item.content
+                      }
+                    </div>
                   )
               }
             </Comment.Text>
 
-            { /* comment */ }
+            { /* comment */}
             {
               item.comment.length
                 ? (
-                  item.comment.map((commentList:CommentModel, index:number) => (
+                  item.comment.map((commentList: CommentModel, index: number) => (
                     <Comment.Group>
-                      { commentList.content }
+                      {commentList.content}
                     </Comment.Group>
                   ))
-                ) : ''
+                ) : ""
             }
-            { /* comment */ }
+            { /* comment */}
 
-            { /*  reply */ }
+            { /*  reply */}
             {
               replyBool
                 ? (
@@ -174,23 +229,23 @@ function Item({ item }:Props) {
                     <div>
                       <TextArea
                         className="reply_textarea"
-                        value={ replyText }
-                        onChange={ handleReplyInput }
+                        value={replyText}
+                        onChange={handleReplyInput}
                       />
                     </div>
                     <div>
-                      <Button onClick={ saveReply }>save</Button>
-                      <Button onClick={ cancelReply }>cancel</Button>
+                      <Button onClick={saveReply}>save</Button>
+                      <Button onClick={cancelReply}>cancel</Button>
                     </div>
                   </Comment.Group>
                 )
                 : (
                   <Comment.Content>
-                    <span onClick={ handleReply }>reply</span>
+                    <span onClick={handleReply}>reply</span>
                   </Comment.Content>
                 )
             }
-            { /*  reply */ }
+            { /*  reply */}
 
           </Comment.Content>
         </Comment>
