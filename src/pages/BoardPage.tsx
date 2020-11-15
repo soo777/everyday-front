@@ -9,6 +9,7 @@ import useItem from 'hooks/useItem';
 import ItemModel from 'model/ItemModel';
 import { default as axiosInstance } from 'util/AxiosUtil';
 import ContentEditable from 'react-contenteditable';
+import { render } from 'react-dom';
 import { Constant } from '../config';
 
 const axios = axiosInstance.instance;
@@ -18,8 +19,10 @@ function BoardPage() {
 
   const [content, setContent] = useState<string>('');
 
-  const [file, setFile] = useState<any>();
-  const [previewUrl, setPreviewUrl] = useState<any>('');
+  // const [file, setFile] = useState<any>();
+  // const [previewUrl, setPreviewUrl] = useState<any>('');
+  const [file, setFile] = useState<any>([]);
+  const [previewUrl, setPreviewUrl] = useState<any>([]);
 
   const getItemList = async () => {
     const boardKey = localStorage.getItem(Constant.BOARD_KEY);
@@ -60,24 +63,33 @@ function BoardPage() {
 
     console.log(content);
     console.log(file);
+    console.log(previewUrl);
 
     const formData = new FormData();
     formData.append('boardKey', boardKey!);
     formData.append('content', content!.toString());
-    formData.append('file', file);
+
+    for (let i = 0; i < file.length; i++) {
+      formData.append('file', file[i]);
+    }
+
+    // formData.append('file', file);
 
     // file upload
-    // await axios.post('/api/v1/item/file', formData).then((data) => {
-    //   console.log(data);
-    //
-    //   if (data.data.status === true) {
-    //     setContent('');
-    //     getItemList().then((r) => {});
-    //   }
-    // });
+    await axios.post('/api/v1/item/file', formData).then((data) => {
+      console.log(data);
 
-    setPreviewUrl('');
-    setContent('');
+      // if (data.data.status === true) {
+      //   setContent('');
+      //   setPreviewUrl('');
+      //   setContent('');
+      //
+      //   getItemList().then((r) => {});
+      // }
+    });
+
+    // setPreviewUrl('');
+    // setContent('');
 
     // 기존 create item
     // await axios.post('/api/v1/item', payload).then((data) => {
@@ -95,17 +107,65 @@ function BoardPage() {
     e.preventDefault();
     console.log(e);
 
-    const reader = new FileReader();
-    const file = e.target.files[0];
+    const fileArr = e.target.files;
+    console.log(fileArr);
 
-    console.log(reader);
+    // const reader = new FileReader();
+    // const newFile = e.target.files[0];
+    //
+    // console.log(reader);
+    // console.log(newFile);
+    //
+    // reader.onload = () => {
+    //   setFile(fileArr);
+    //   setPreviewUrl(reader.result);
+    // };
+    // reader.readAsDataURL(newFile);
+
+    // for (let i = 0; i < fileArr.length; i++) {
+    //   const reader = new FileReader();
+    //   const newFile = fileArr[i];
+    //
+    //   const a = file;
+    //   // console.log(a);
+    //   a.push(fileArr[i]);
+    //
+    //   const b = previewUrl;
+    //   console.log(b);
+    //
+    //   reader.onload = () => {
+    //     const c = b.concat(reader.result);
+    //     // console.log(b);
+    //
+    //     setFile(a);
+    //     // setPreviewUrl(previewUrl.concat(reader.result));
+    //     setPreviewUrl(c);
+    //     console.log(previewUrl);
+    //   };
+    //   reader.readAsDataURL(newFile);
+    // }
+
+    const files = Array.from(e.target.files);
+
+    Promise.all(files.map((file:any) => (new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.addEventListener('load', (ev) => {
+        resolve(ev.target!.result);
+      });
+      reader.addEventListener('error', reject);
+      reader.readAsDataURL(file);
+    })))).then((images:any) => {
+      /* Once all promises are resolved, update state with image URI array */
+      setPreviewUrl(images);
+      // this.setState({ imageArray : images })
+    }, (error) => {
+      console.error(error);
+    });
+
+    setFile(files);
+
     console.log(file);
-
-    reader.onload = () => {
-      setFile(file);
-      setPreviewUrl(reader.result);
-    };
-    reader.readAsDataURL(file);
+    console.log(previewUrl);
   };
 
   return (
@@ -122,9 +182,13 @@ function BoardPage() {
                 <div style={ { border: '1px solid black' } }>
                   <div>
                     {
-                      previewUrl
+                      previewUrl.length > 0
                         ? (
-                          <img src={ previewUrl } alt="alt" style={ { height: '150px' } } />
+                          previewUrl.map((data:any) => (
+                            // <>asdf</>
+                            <img src={ data } alt="alt" style={ { height: '150px' } } />
+                          ))
+                          // <img src={ previewUrl } alt="alt" style={ { height: '150px' } } />
                         )
                         : ''
                     }
@@ -154,6 +218,7 @@ function BoardPage() {
                     </label>
                     <Input
                       type="file"
+                      multiple
                       accept="image/jpg, image/jpeg, image/png"
                       onChange={ handleFileUpload }
                       id="ex_file"
