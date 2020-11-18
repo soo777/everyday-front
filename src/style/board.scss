@@ -110,6 +110,23 @@
         .ui.comments {
           padding: unset;
         }
+
+        .fileImage {
+          height: 220px;
+          line-height: 220px;
+
+          img {
+            max-width: 200px;
+            max-height: 200px;
+            vertical-align: middle;
+            padding: 5px;
+          }
+        }
+
+        .float_left {
+          float: left;
+        }
+
       }
     }
 

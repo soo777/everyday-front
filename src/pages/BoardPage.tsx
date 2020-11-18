@@ -79,13 +79,13 @@ function BoardPage() {
     await axios.post('/api/v1/item/file', formData).then((data) => {
       console.log(data);
 
-      // if (data.data.status === true) {
-      //   setContent('');
-      //   setPreviewUrl('');
-      //   setContent('');
-      //
-      //   getItemList().then((r) => {});
-      // }
+      if (data.data.status === true) {
+        setContent('');
+        setPreviewUrl('');
+        setContent('');
+
+        getItemList().then((r) => {});
+      }
     });
 
     // setPreviewUrl('');

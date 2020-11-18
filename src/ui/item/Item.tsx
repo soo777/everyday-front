@@ -54,7 +54,9 @@ function Item({ item }: Props) {
   };
 
   useEffect(() => {
-    getFileImage().then();
+    if (item.files.length > 0) {
+      getFileImage().then();
+    }
   }, []);
 
   const getItemList = async () => {
@@ -186,16 +188,12 @@ function Item({ item }: Props) {
                     // item.content
                     <div>
                       {
-                        // item.files.map((file:any, index:number) => (
-                        //   // <img src={ file.path } alt="aa" />
-                        //   // <img src="/Users/moonsungsoo/gitlab/file/cfe15581483a455baf1fbcc119012ea2.jpeg" alt="aa" />
-                        //   <img src={ img } alt="aa" />
-                        // ))
-                      }
-                      {
                         img ? (
-                          img.map((img: string) => (
-                            <img src={ img } alt="image1" />
+                          img.map((img: string, index:number, arr:any) => (
+                            // <div className="fileImage" >
+                            <div className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage' }>
+                              <img src={ img } alt="image1" />
+                            </div>
                           ))
                         )
                           : ''
