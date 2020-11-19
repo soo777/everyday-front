@@ -111,20 +111,39 @@
           padding: unset;
         }
 
-        .fileImage {
-          height: 220px;
-          line-height: 220px;
+        .imgDiv {
+          .fileImage {
+            height: 220px;
+            line-height: 220px;
 
-          img {
-            max-width: 200px;
-            max-height: 200px;
-            vertical-align: middle;
-            padding: 5px;
+            img {
+              max-width: 200px;
+              max-height: 200px;
+              vertical-align: middle;
+              padding: 5px;
+            }
           }
-        }
 
-        .float_left {
-          float: left;
+          .float_left {
+            float: left;
+          }
+
+          .aaa {
+            .plus {
+              font-size: 40px;
+              line-height: 220px;
+              padding-left: 20px;
+            }
+            .more {
+              font-size: 20px;
+            }
+          }
+
+          .aaa::after {
+            display: block;
+            clear: both;
+            content: "";
+          }
         }
 
       }

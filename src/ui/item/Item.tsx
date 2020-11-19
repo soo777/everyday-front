@@ -23,6 +23,7 @@ function Item({ item }: Props) {
   const [replyBool, setReplyBool] = useState<boolean>(false);
   const [replyText, setReplyText] = useState<string | number | undefined>('');
   const [img, setImg] = useState<any>();
+  const [tempImg, setTempImg] = useState<any>();
 
   const getFileImage = async () => {
     console.log(item.files);
@@ -33,7 +34,7 @@ function Item({ item }: Props) {
       filePathArr.push(file.path);
     });
 
-    console.log(filePathArr);
+    // console.log(filePathArr);
 
     // file base 가져오는 api
     const payload = {
@@ -49,7 +50,11 @@ function Item({ item }: Props) {
       const { img } = data.data.object;
       setImg(img);
 
-      console.log(img);
+      const tempImg = img.filter((data:any, index:number) => index < 3);
+      setTempImg(tempImg);
+      console.log(tempImg);
+
+      // console.log(img);
     });
   };
 
@@ -186,18 +191,25 @@ function Item({ item }: Props) {
                   )
                   : (
                     // item.content
-                    <div>
+                    <div className="imgDiv">
                       {
-                        img ? (
-                          img.map((img: string, index:number, arr:any) => (
-                            // <div className="fileImage" >
-                            <div className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage' }>
+                        tempImg ? (
+                          tempImg.map((img: string, index:number, arr:any) => (
+                            // <div className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage' }>
+                            <div className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage float_left' }>
                               <img src={ img } alt="image1" />
                             </div>
                           ))
                         )
                           : ''
                       }
+                      <div className="aaa">
+                        <div>
+                          <Icon name="plus" className="plus" />
+                          {/*<br />*/}
+                          {/*<span className="more">more</span>*/}
+                        </div>
+                      </div>
                       <div>
                         { item.content }
                       </div>
