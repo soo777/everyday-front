@@ -1,6 +1,6 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import {
-  Icon, Comment, Dropdown, TextArea, Button, TextAreaProps,
+  Icon, Comment, Dropdown, TextArea, Button, TextAreaProps, Modal, Image,
 } from 'semantic-ui-react';
 import qs from 'qs';
 import ItemModel from '../../model/ItemModel';
@@ -22,8 +22,9 @@ function Item({ item }: Props) {
   const [modifyText, setModifyText] = useState<string | number | undefined>(item.content);
   const [replyBool, setReplyBool] = useState<boolean>(false);
   const [replyText, setReplyText] = useState<string | number | undefined>('');
-  const [img, setImg] = useState<any>();
-  const [tempImg, setTempImg] = useState<any>();
+  const [img, setImg] = useState<any>([]);
+  const [tempImg, setTempImg] = useState<any>([]);
+  const [imgModal, setImgModal] = useState<boolean>(false);
 
   const getFileImage = async () => {
     console.log(item.files);
@@ -64,6 +65,7 @@ function Item({ item }: Props) {
     }
   }, []);
 
+  /** item * */
   const getItemList = async () => {
     const boardKey = localStorage.getItem(Constant.BOARD_KEY);
 
@@ -103,7 +105,9 @@ function Item({ item }: Props) {
   const cancelModifyItem = () => {
     setModifyBool(false);
   };
+  /** item * */
 
+  /** item modify * */
   const handleModifyInput = (e: SyntheticEvent, data: TextAreaProps) => {
     setModifyText(data.value);
   };
@@ -122,7 +126,9 @@ function Item({ item }: Props) {
       }
     });
   };
+  /** item modify * */
 
+  /** item reply * */
   const handleReply = () => {
     setReplyBool(true);
   };
@@ -150,6 +156,13 @@ function Item({ item }: Props) {
       }
     });
   };
+  /** item reply * */
+
+  /** image modal * */
+  const setImageModal = (bool:boolean) => {
+    setImgModal(bool);
+  };
+  /** image modal * */
 
   return (
     <>
@@ -196,8 +209,11 @@ function Item({ item }: Props) {
                         tempImg ? (
                           tempImg.map((img: string, index:number, arr:any) => (
                             // <div className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage' }>
-                            <div className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage float_left' }>
-                              <img src={ img } alt="image1" />
+                            <div
+                              className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage float_left' }
+                              onClick={ () => { setImageModal(true); } }
+                            >
+                              <img className="imgPreview" src={ img } alt="image1" />
                             </div>
                           ))
                         )
@@ -206,8 +222,8 @@ function Item({ item }: Props) {
                       <div className="aaa">
                         <div>
                           <Icon name="plus" className="plus" />
-                          {/*<br />*/}
-                          {/*<span className="more">more</span>*/}
+                          { /* <br /> */ }
+                          { /* <span className="more">more</span> */ }
                         </div>
                       </div>
                       <div>
@@ -215,6 +231,7 @@ function Item({ item }: Props) {
                       </div>
                     </div>
                   )
+
               }
             </Comment.Text>
 
@@ -260,6 +277,39 @@ function Item({ item }: Props) {
           </Comment.Content>
         </Comment>
       </Comment.Group>
+
+      { /* image modal */ }
+      <Modal
+        onClose={ () => setImageModal(false) }
+        onOpen={ () => setImageModal(true) }
+        open={ imgModal }
+        size="small"
+      >
+        <Modal.Header>Images</Modal.Header>
+        <Modal.Content image>
+          <span><Icon name="arrow left" /></span>
+          <Image src={ img[1] } size="large" centered />
+          <span><Icon name="arrow right" /></span>
+        </Modal.Content>
+        <Modal.Content>
+          {
+            img.map((img: string, index:number, arr:any) => (
+              <div
+                className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage float_left' }
+                // onClick={ () => { setImageModal(true); } }
+              >
+                <img className="imgPreview" src={ img } alt="image1" />
+              </div>
+            ))
+          }
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={ () => setImageModal(false) } positive>
+            Ok
+          </Button>
+        </Modal.Actions>
+      </Modal>
+      { /* image modal */ }
     </>
   );
 }
