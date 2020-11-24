@@ -25,6 +25,7 @@ function Item({ item }: Props) {
   const [img, setImg] = useState<any>([]);
   const [tempImg, setTempImg] = useState<any>([]);
   const [imgModal, setImgModal] = useState<boolean>(false);
+  const [imgModalPreview, setImgModalPreview] = useState<any>();
 
   const getFileImage = async () => {
     console.log(item.files);
@@ -54,6 +55,9 @@ function Item({ item }: Props) {
       const tempImg = img.filter((data:any, index:number) => index < 3);
       setTempImg(tempImg);
       console.log(tempImg);
+
+      // modal image setting
+      setImgModalPreview(img[0]);
 
       // console.log(img);
     });
@@ -219,9 +223,11 @@ function Item({ item }: Props) {
                         )
                           : ''
                       }
-                      <div className="aaa">
+                      <div className="moreImg">
                         <div>
-                          <Icon name="plus" className="plus" />
+                          <span onClick={ () => { setImageModal(true); } }>
+                            <Icon name="plus" className="plus" />
+                          </span>
                           { /* <br /> */ }
                           { /* <span className="more">more</span> */ }
                         </div>
@@ -284,26 +290,34 @@ function Item({ item }: Props) {
         onOpen={ () => setImageModal(true) }
         open={ imgModal }
         size="small"
+        className="imageModal"
       >
         <Modal.Header>Images</Modal.Header>
         <Modal.Content image>
           <span><Icon name="arrow left" /></span>
-          <Image src={ img[1] } size="large" centered />
+          { /* <Image src={ img[1] } size="large" centered /> */ }
+          <Image src={ imgModalPreview } size="large" centered />
           <span><Icon name="arrow right" /></span>
         </Modal.Content>
         <Modal.Content>
           {
             img.map((img: string, index:number, arr:any) => (
               <div
-                className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage float_left' }
+                style={ { float: 'left' } }
                 // onClick={ () => { setImageModal(true); } }
               >
-                <img className="imgPreview" src={ img } alt="image1" />
+                <img
+                  className="imgList"
+                  src={ img }
+                  alt="image1"
+                  style={ { width: '150px', height: '100px', padding: '5px' } }
+                  onClick={ () => { setImgModalPreview(img); } }
+                />
               </div>
             ))
           }
         </Modal.Content>
-        <Modal.Actions>
+        <Modal.Actions style={ { clear: 'both' } }>
           <Button onClick={ () => setImageModal(false) } positive>
             Ok
           </Button>

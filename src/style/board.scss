@@ -128,7 +128,7 @@
             float: left;
           }
 
-          .aaa {
+          .moreImg {
             .plus {
               font-size: 40px;
               line-height: 220px;
@@ -139,7 +139,7 @@
             }
           }
 
-          .aaa::after {
+          .moreImg::after {
             display: block;
             clear: both;
             content: "";
