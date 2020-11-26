@@ -3,24 +3,77 @@ import {
   Button, Form, Input, Modal, Table,
 } from 'semantic-ui-react';
 import useCommon from '../../hooks/useCommon';
+import useUser from '../../hooks/useUser';
 
 function UserInfoModal() {
+  const { user, handleUserInfoModalFn } = useUser();
   const { common, handleAlertModalFn } = useCommon();
 
   const closeModal = () => {
-    handleAlertModalFn(false);
+    handleUserInfoModalFn(false);
   };
 
   return (
     <>
       <Modal
-        size="mini"
-        open={ common.alertModal }
+        size="tiny"
+        open={ user.userInfoModal }
         onClose={ closeModal }
       >
-        <Modal.Header>{ common.alert.header }</Modal.Header>
+        <Modal.Header>My Info</Modal.Header>
         <Modal.Content>
-          <p>{ common.alert.content }</p>
+          <Form>
+            <Table celled>
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell>
+                    ID
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Input
+                      // value={ userId }
+                      // onChange={ handleUserId }
+                    />
+                  </Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>
+                    Password
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Input
+                      type="password"
+                      // value={ password }
+                      // onChange={ handlePassword }
+                    />
+                  </Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>
+                    Password Confirm
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Input
+                      type="password"
+                      // value={ passwordConfirm }
+                      // onChange={ handlePasswordConfirm }
+                    />
+                  </Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>
+                    Name
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Input
+                      // value={ name }
+                      // onChange={ handleName }
+                    />
+                  </Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            </Table>
+          </Form>
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={ closeModal }>OK</Button>

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { RootState } from 'modules';
-import { handleCreateUserModal } from '../modules/user';
+import { handleCreateUserModal, handleUserInfoModal } from '../modules/user';
 
 function useUser() {
   const user = useSelector((state:RootState) => state.user);
@@ -12,9 +12,15 @@ function useUser() {
     [dispatch],
   );
 
+  const handleUserInfoModalFn = useCallback(
+    (bool:boolean) => dispatch(handleUserInfoModal(bool)),
+    [dispatch],
+  );
+
   return {
     user,
     handleCreateUserModalFn,
+    handleUserInfoModalFn,
   };
 }
 
