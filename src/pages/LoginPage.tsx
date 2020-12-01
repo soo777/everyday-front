@@ -5,6 +5,7 @@ import {
 import { RouteComponentProps } from 'react-router-dom';
 import { Constant } from 'config';
 import { default as axiosInstance } from 'util/AxiosUtil';
+import jsonwebtoken from 'jsonwebtoken';
 import useUser from 'hooks/useUser';
 import { CreateUserModal } from 'ui/common';
 
@@ -30,6 +31,18 @@ function LoginPage(routesProps: RouteComponentProps) {
     handleCreateUserModalFn(true);
   };
 
+  const setJwtTokenLocalStorage = (jwtToken: any) => {
+    let decoded = jsonwebtoken.decode(jwtToken);
+    decoded = jsonwebtoken.decode(jwtToken, { complete: true });
+    const parseJWT:any = decoded!;
+
+    const { sub } = parseJWT.payload;
+
+    localStorage.setItem(Constant.JWT_TOKEN, jwtToken);
+    localStorage.setItem(Constant.USER_ID, sub);
+    console.log(decoded);
+  };
+
   const login = async () => {
     const payload = {
       username: userId,
@@ -40,7 +53,9 @@ function LoginPage(routesProps: RouteComponentProps) {
       console.log(data);
       if (data.status === 200) {
         console.log('login success');
-        localStorage.setItem(Constant.JWT_TOKEN, data.data.object);
+        const jwtToken = data.data.object;
+
+        setJwtTokenLocalStorage(jwtToken);
 
         routesProps.history.push('/boardList');
       } else {

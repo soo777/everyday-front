@@ -30,10 +30,7 @@ function UserInfoModal() {
                     ID
                   </Table.Cell>
                   <Table.Cell>
-                    <Input
-                      // value={ userId }
-                      // onChange={ handleUserId }
-                    />
+                    ididid
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
