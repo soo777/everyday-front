@@ -4,7 +4,7 @@ import { UserInfoModal } from '../common';
 import useUser from '../../hooks/useUser';
 
 function Header() {
-  const { handleUserInfoModalFn } = useUser();
+  const { user, handleUserInfoModalFn } = useUser();
 
   const openInfo = () => {
     handleUserInfoModalFn(true);
@@ -20,8 +20,7 @@ function Header() {
           </span>
         </div>
       </div>
-
-      <UserInfoModal />
+      { user.userInfoModal ? <UserInfoModal /> : null }
     </>
   );
 }
