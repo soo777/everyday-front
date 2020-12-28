@@ -1,0 +1,7 @@
+.login .login_btn {
+    padding: 5px;
+}
+
+.login .login_btn .ui.button {
+    width: 100%;
+}
