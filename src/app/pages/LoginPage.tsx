@@ -3,11 +3,11 @@ import {
   Button, Form, Header, Input,
 } from 'semantic-ui-react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Constant } from 'config';
-import { default as axiosInstance } from 'util/AxiosUtil';
+import { Constant } from 'app/config';
+import { default as axiosInstance } from 'app/util/AxiosUtil';
 import jsonwebtoken from 'jsonwebtoken';
-import useUser from 'hooks/useUser';
-import { CreateUserModal } from 'ui/common';
+import useUser from 'app/hooks/useUser';
+import { CreateUserModal } from 'app/ui/common';
 
 const axios = axiosInstance.instance;
 

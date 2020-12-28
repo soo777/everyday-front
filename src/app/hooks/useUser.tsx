@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { RootState } from 'modules';
+import { RootState } from 'app/modules';
 import { handleCreateUserModal, handleUserInfoModal } from '../modules/user';
 
 function useUser() {

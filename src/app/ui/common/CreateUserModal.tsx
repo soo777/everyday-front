@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import {
   Button, Form, Input, Modal, Table,
 } from 'semantic-ui-react';
-import useUser from 'hooks/useUser';
-import { Message } from 'config';
-import useCommon from 'hooks/useCommon';
+import useUser from 'app/hooks/useUser';
+import { Message } from 'app/config';
+import useCommon from 'app/hooks/useCommon';
 import { AlertModal } from './index';
 import { default as axiosInstance } from '../../util/AxiosUtil';
 

@@ -4,10 +4,10 @@ import React, {
 import {
   Button, Header, Icon, Input, TextArea, TextAreaProps,
 } from 'semantic-ui-react';
-import { AppLayout, Item } from 'ui';
-import useItem from 'hooks/useItem';
-import ItemModel from 'model/ItemModel';
-import { default as axiosInstance } from 'util/AxiosUtil';
+import { AppLayout, Item } from 'app/ui';
+import useItem from 'app/hooks/useItem';
+import ItemModel from 'app/model/ItemModel';
+import { default as axiosInstance } from 'app/util/AxiosUtil';
 import ContentEditable from 'react-contenteditable';
 import { render } from 'react-dom';
 import { Constant } from '../config';

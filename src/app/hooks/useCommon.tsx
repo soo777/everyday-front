@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { RootState } from 'modules';
+import { RootState } from 'app/modules';
 import { handleAlertModal, setAlertModal } from '../modules/common';
 
 function useCommon() {

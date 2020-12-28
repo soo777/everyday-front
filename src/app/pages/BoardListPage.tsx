@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {
   Icon,
 } from 'semantic-ui-react';
-import useBoard from 'hooks/useBoard';
-import { CreateBoardModal } from 'ui/board';
-import { AppLayout } from 'ui/layout';
-import { default as axiosInstance } from 'util/AxiosUtil';
+import useBoard from 'app/hooks/useBoard';
+import { CreateBoardModal } from 'app/ui/board';
+import { AppLayout } from 'app/ui/layout';
+import { default as axiosInstance } from 'app/util/AxiosUtil';
 import { RouteComponentProps } from 'react-router-dom';
 import BoardModel from '../model/BoardModel';
 import { Constant } from '../config';
