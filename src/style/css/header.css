@@ -2,3 +2,16 @@
     padding: 10px;
     text-align: center;
 }
+
+.top.header {
+    position: fixed;
+    width: 85%;
+    height: 43px;
+    padding: 1%;
+    background: aliceblue;
+    text-align: center;
+}
+
+.top.header .user {
+    float: right;
+}
