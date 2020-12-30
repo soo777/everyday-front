@@ -14,3 +14,159 @@
 .sign_div .signIn:hover {
     color: aquamarine;
 }
+
+.board {
+    padding-top: 43px;
+    padding-bottom: 30px;
+}
+
+.board .leftBar {
+    width: 20%;
+    //height: 100%;
+    float: left;
+    background-color: cadetblue;
+}
+
+.board .middle.content {
+    width: 60%;
+    /*height: 100%;*/
+    float: left;
+    padding: 10px;
+    background-color: beige;
+}
+
+.board .middle.content .createItem {
+    /*height: 150px;*/
+    padding: 5px;
+    margin-bottom: 30px;
+    background-color: aquamarine;
+}
+
+.board .middle.content .createItem .editableDiv {
+    height: 100px;
+    overflow-y: auto;
+    /*border: 1px solid black;*/
+}
+
+/*dive contentEditable placeholder*/
+.board .middle.content .createItem [contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-ph)
+}
+
+.board .middle.content .createItem .save {
+    text-align: right;
+}
+
+.board .middle.content .createItem .save .ui.button {
+    width: 80px;
+}
+
+/*file upload button*/
+.board .middle.content .createItem .fileBox label {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #999;
+    float: left;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+}
+
+.board .middle.content .createItem .fileBox input[type="file"] {
+    /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+/*file upload button*/
+
+/*createItem min*/
+.board .middle.content .min {
+    height: 150px;
+}
+
+/*createItem max*/
+.board .middle.content .max {
+    height: 300px;
+}
+
+.board .middle.content .itemList {
+    height: 100%;
+    padding: 5px;
+}
+
+.board .middle.content .itemList .ui.comments {
+    max-width: 100%;
+    margin-bottom: 3em;
+}
+
+.board .middle.content .itemList .ui.comments .option {
+    float: right;
+}
+
+.board .middle.content .itemList .ui.comments .modify_textarea {
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 6vh;
+    max-height: 6vh;
+}
+
+.board .middle.content .itemList .ui.comments .reply_textarea {
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 4vh;
+    max-height: 4vh;
+}
+
+.board .middle.content .itemList .ui.comments .ui.comments {
+    padding: unset;
+}
+
+.board .middle.content .itemList .ui.comments .imgDiv .fileImage {
+    height: 220px;
+    line-height: 220px;
+}
+
+.board .middle.content .itemList .ui.comments .imgDiv .fileImage .imgPreview {
+    max-width: 200px;
+    max-height: 200px;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+.board .middle.content .itemList .ui.comments .imgDiv .fileImage .float_left {
+    float: left;
+}
+
+.board .middle.content .itemList .ui.comments .imgDiv .fileImage .moreImg .plus {
+    font-size: 40px;
+    line-height: 220px;
+    padding-left: 20px;
+}
+
+.board .middle.content .itemList .ui.comments .imgDiv .fileImage .moreImg .more {
+    font-size: 20px;
+}
+
+.board .middle.content .itemList .ui.comments .imgDiv .fileImage .moreImg::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.board .rightBar {
+    width: 20%;
+    //height: 100%;
+    float: left;
+    background-color: darkgrey;
+}
