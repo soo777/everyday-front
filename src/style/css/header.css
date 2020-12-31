@@ -6,9 +6,9 @@
 .top.header {
     position: fixed;
     width: 85%;
-    height: 43px;
+    height: 45px;
     padding: 1%;
-    background: aliceblue;
+    background: #88c2f5;
     text-align: center;
 }
 

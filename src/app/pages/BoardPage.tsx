@@ -172,80 +172,83 @@ function BoardPage() {
     <>
       <AppLayout>
         <div className="board">
-          <div className="leftBar">
-            sidebar
-          </div>
-          <div className="middle content">
-            <div>
-              { /* 입력 박스 */ }
-              <div className={ previewUrl ? 'createItem max' : 'createItem min' }>
-                <div style={ { border: '1px solid black' } }>
-                  <div>
-                    {
-                      previewUrl.length > 0
-                        ? (
-                          previewUrl.map((data:any) => (
-                            // <>asdf</>
-                            <img src={ data } alt="alt" style={ { height: '150px' } } />
-                          ))
-                          // <img src={ previewUrl } alt="alt" style={ { height: '150px' } } />
-                        )
-                        : ''
-                    }
+          <section>
+            <div className="leftBar">
+              <div className="menu"><Icon name="newspaper outline" />새 소식</div>
+              <div className="menu"><Icon name="users" />멤버</div>
+            </div>
+            <div className="middle content">
+              <div>
+                { /* 입력 박스 */ }
+                <div className={ previewUrl.length > 0 ? 'createItem max' : 'createItem min' }>
+                  <div style={ { border: '1px solid black' } }>
+                    <div>
+                      {
+                        previewUrl.length > 0
+                          ? (
+                            previewUrl.map((data:any) => (
+                              // <>asdf</>
+                              <img src={ data } alt="alt" style={ { height: '150px' } } />
+                            ))
+                            // <img src={ previewUrl } alt="alt" style={ { height: '150px' } } />
+                          )
+                          : ''
+                      }
+                    </div>
+                    { /* <div */ }
+                    { /*  contentEditable */ }
+                    { /*  data-ph="오늘 무엇을 하셨나요?" */ }
+                    { /*  className="editableDiv" */ }
+                    { /*  onInput={ handleContentArea } */ }
+                    { /* /> */ }
+                    <ContentEditable
+                      html={ content }
+                      onChange={ handleContentArea }
+                      disabled={ false }
+                      className="editableDiv"
+                      data-ph="오늘 무엇을 하셨나요?"
+                      onSubmit={ () => false }
+                    />
                   </div>
-                  { /* <div */ }
-                  { /*  contentEditable */ }
-                  { /*  data-ph="오늘 무엇을 하셨나요?" */ }
-                  { /*  className="editableDiv" */ }
-                  { /*  onInput={ handleContentArea } */ }
-                  { /* /> */ }
-                  <ContentEditable
-                    html={ content }
-                    onChange={ handleContentArea }
-                    disabled={ false }
-                    className="editableDiv"
-                    data-ph="오늘 무엇을 하셨나요?"
-                    onSubmit={ () => false }
-                  />
-                </div>
 
-                <div className="save">
-                  { /* file upload */ }
-                  <div className="fileBox">
-                    { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }
-                    <label htmlFor="ex_file">
-                      <Icon name="plus" />
-                    </label>
-                    <Input
-                      type="file"
-                      multiple
-                      accept="image/jpg, image/jpeg, image/png"
-                      onChange={ handleFileUpload }
-                      id="ex_file"
-                    />
-                    <Button onClick={ createItem }>저장</Button>
+                  <div className="save">
+                    { /* file upload */ }
+                    <div className="fileBox">
+                      { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }
+                      <label htmlFor="ex_file">
+                        <Icon name="plus" />
+                      </label>
+                      <Input
+                        type="file"
+                        multiple
+                        accept="image/jpg, image/jpeg, image/png"
+                        onChange={ handleFileUpload }
+                        id="ex_file"
+                      />
+                      <Button onClick={ createItem }>저장</Button>
+                    </div>
+                    { /* file upload */ }
                   </div>
-                  { /* file upload */ }
                 </div>
-              </div>
-              { /* 리스트 */ }
-              <div className="itemList">
-                {
-                item.itemList
-                  ? item.itemList.map((itemList:ItemModel, index:number) => (
-                    <Item
-                      key={ itemList.itemKey }
-                      item={ itemList }
-                    />
-                  ))
-                  : ''
-              }
+                { /* 리스트 */ }
+                <div className="itemList">
+                  {
+                  item.itemList
+                    ? item.itemList.map((itemList:ItemModel, index:number) => (
+                      <Item
+                        key={ itemList.itemKey }
+                        item={ itemList }
+                      />
+                    ))
+                    : ''
+                }
+                </div>
               </div>
             </div>
-          </div>
-          <div className="rightBar">
-            sidebar
-          </div>
+            <div className="rightBar">
+              sidebar
+            </div>
+          </section>
         </div>
       </AppLayout>
     </>

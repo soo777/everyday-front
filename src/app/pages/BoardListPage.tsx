@@ -58,7 +58,9 @@ function BoardListPage(routesProps: RouteComponentProps) {
                 onClick={ () => { clickBoard(boardList); } }
                 className="boardList"
               >
-                { boardList.boardName }
+                <div className="list">
+                  { boardList.boardName }
+                </div>
               </div>
             ))
             : ''

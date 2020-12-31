@@ -3,28 +3,45 @@
 }
 
 .center.aligned {
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .sideBar {
-    width: 25%;
+    width: 20rem;
     height: 100vh;
-    padding-top: 43px;
-    background-color: aquamarine;
+    padding-top: 45px;
+    background-color: #d7d6d6;
     float: left;
 }
 
 .sideBar .boardList {
-    background-color: red;
+    /*background-color: red;*/
     height: 90px;
-    padding: 30px 30px 0px 34px;
+    /*padding: 30px 30px 0px 34px;*/
+    padding: 10px;
     font-size: 20px;
+}
+
+.sideBar .boardList .list {
+    height: 100%;
+    line-height: 70px;
+    vertical-align: middle;
+    padding-left: 20px;
+    background-color: #c6c6c6;
+}
+
+.sideBar .boardList:hover {
+    background-color: #e2e2e2;
 }
 
 .sideBar .create {
     height: 90px;
-    padding: 30px 30px 0px 34px;
+    padding: 30px 10px 0px 10px;
     font-size: 20px;
+}
+
+.sideBar .create:hover {
+    background-color: #e2e2e2;
 }
 
 .footer {
@@ -32,5 +49,5 @@
     width: 85%;
     height: 30px;
     bottom: 0;
-    background-color: red;
+    background-color: #88c2f5;
 }

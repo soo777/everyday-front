@@ -1,3 +1,7 @@
+body {
+    background: #f9fcff;
+}
+
 .login {
     position: absolute;
     top: 35%;

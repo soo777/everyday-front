@@ -16,20 +16,29 @@
 }
 
 .board {
-    padding-top: 43px;
+    padding-top: 45px;
     padding-bottom: 30px;
+}
+
+.board section {
+    min-height: 63rem;
 }
 
 .board .leftBar {
     width: 20%;
-    //height: 100%;
+    min-height: inherit;
     float: left;
-    background-color: cadetblue;
+    /*background-color: cadetblue;*/
+}
+
+.board .leftBar .menu {
+    padding: 10px;
+    font-size: 15px;
 }
 
 .board .middle.content {
     width: 60%;
-    /*height: 100%;*/
+    min-height: inherit;
     float: left;
     padding: 10px;
     background-color: beige;
@@ -166,7 +175,7 @@
 
 .board .rightBar {
     width: 20%;
-    //height: 100%;
+    min-height: inherit;
     float: left;
-    background-color: darkgrey;
+    /*background-color: darkgrey;*/
 }
