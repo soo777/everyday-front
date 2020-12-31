@@ -181,7 +181,7 @@ function BoardPage() {
               <div>
                 { /* 입력 박스 */ }
                 <div className={ previewUrl.length > 0 ? 'createItem max' : 'createItem min' }>
-                  <div style={ { border: '1px solid black' } }>
+                  <div className="editBox">
                     <div>
                       {
                         previewUrl.length > 0
@@ -216,7 +216,8 @@ function BoardPage() {
                     <div className="fileBox">
                       { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }
                       <label htmlFor="ex_file">
-                        <Icon name="plus" />
+                        { /* <Icon name="plus" /> */ }
+                        <Icon name="image" />
                       </label>
                       <Input
                         type="file"
@@ -225,9 +226,11 @@ function BoardPage() {
                         onChange={ handleFileUpload }
                         id="ex_file"
                       />
-                      <Button onClick={ createItem }>저장</Button>
                     </div>
                     { /* file upload */ }
+                    <div>
+                      <Button onClick={ createItem }>저장</Button>
+                    </div>
                   </div>
                 </div>
                 { /* 리스트 */ }

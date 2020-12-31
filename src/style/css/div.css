@@ -44,17 +44,23 @@
     background-color: beige;
 }
 
+.board .middle.content .editBox {
+    /*border-radius: 5px;*/
+    /*border: 0.5px solid black;*/
+}
+
 .board .middle.content .createItem {
     /*height: 150px;*/
     padding: 5px;
-    margin-bottom: 30px;
-    background-color: aquamarine;
+    margin-bottom: 20px;
+    background-color: #ebebeb;
 }
 
 .board .middle.content .createItem .editableDiv {
     height: 100px;
     overflow-y: auto;
-    /*border: 1px solid black;*/
+    border: 1px solid #c1c1c1;
+    border-radius: 5px;
 }
 
 /*dive contentEditable placeholder*/
@@ -64,10 +70,15 @@
 
 .board .middle.content .createItem .save {
     text-align: right;
+    padding-top: 5px;
 }
 
 .board .middle.content .createItem .save .ui.button {
     width: 80px;
+}
+
+.board .middle.content .createItem .fileBox {
+    float: left;
 }
 
 /*file upload button*/
@@ -79,7 +90,7 @@
     font-size: inherit;
     line-height: normal;
     vertical-align: middle;
-    background-color: #fdfdfd;
+    background-color: #e0e1e2;
     cursor: pointer;
     border: 1px solid #ebebeb;
     border-bottom-color: #e2e2e2;
@@ -101,22 +112,25 @@
 
 /*createItem min*/
 .board .middle.content .min {
-    height: 150px;
+    /*height: 150px;*/
+    border-radius: 10px;
 }
 
 /*createItem max*/
 .board .middle.content .max {
-    height: 300px;
+    height: 310px;
+    border-radius: 10px;
 }
 
 .board .middle.content .itemList {
     height: 100%;
-    padding: 5px;
 }
 
 .board .middle.content .itemList .ui.comments {
     max-width: 100%;
-    margin-bottom: 3em;
+    background-color: #ebebeb;
+    border-radius: 10px;
+    padding: 5px;
 }
 
 .board .middle.content .itemList .ui.comments .option {
