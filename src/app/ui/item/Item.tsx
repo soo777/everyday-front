@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import {
-  Icon, Comment, Dropdown, TextArea, Button, TextAreaProps, Modal, Image,
-} from 'semantic-ui-react';
+  Icon, Comment, Dropdown, TextArea, Button, TextAreaProps, Modal, Image, Input,
+} from "semantic-ui-react";
 import qs from 'qs';
 import ItemModel from '../../model/ItemModel';
 import { default as axiosInstance } from '../../util/AxiosUtil';
@@ -226,7 +226,9 @@ function Item({ item }: Props) {
                       <div className="moreImg">
                         <div>
                           <span onClick={ () => { setImageModal(true); } }>
-                            <Icon name="plus" className="plus" />
+                            {
+                              tempImg.length > 0 ? <Icon name="plus" className="plus" /> : null
+                            }
                           </span>
                           { /* <br /> */ }
                           { /* <span className="more">more</span> */ }
@@ -274,7 +276,8 @@ function Item({ item }: Props) {
                 )
                 : (
                   <Comment.Content>
-                    <span onClick={ handleReply }>reply</span>
+                    <span onClick={ handleReply }>reply comment</span>
+                    <Input />
                   </Comment.Content>
                 )
             }

@@ -151,6 +151,10 @@
     max-height: 4vh;
 }
 
+.board .middle.content .itemList .ui.comments .content .metadata {
+    margin: 0px;
+}
+
 .board .middle.content .itemList .ui.comments .ui.comments {
     padding: unset;
 }
