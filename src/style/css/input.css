@@ -2,3 +2,6 @@
     width: 100%;
 }
 
+.ui.input.comment > input {
+    padding: 5px;
+}

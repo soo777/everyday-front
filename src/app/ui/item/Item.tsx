@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import {
   Icon, Comment, Dropdown, TextArea, Button, TextAreaProps, Modal, Image, Input,
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 import qs from 'qs';
 import ItemModel from '../../model/ItemModel';
 import { default as axiosInstance } from '../../util/AxiosUtil';
@@ -145,6 +145,10 @@ function Item({ item }: Props) {
     setReplyText(data.value);
   };
 
+  const handleReplyInput2 = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setReplyText(e.target.value);
+  };
+
   const saveReply = async () => {
     const payload = {
       itemKey: item.itemKey,
@@ -156,9 +160,16 @@ function Item({ item }: Props) {
       console.log(data);
       if (data.data.status) {
         setReplyBool(false);
+        setReplyText('');
         getItemList().then((r) => {});
       }
     });
+  };
+
+  const submitReply = (e:any) => {
+    if (e.key === 'Enter') {
+      saveReply();
+    }
   };
   /** item reply * */
 
@@ -277,7 +288,14 @@ function Item({ item }: Props) {
                 : (
                   <Comment.Content>
                     <span onClick={ handleReply }>reply comment</span>
-                    <Input />
+                    { /* reply comment */ }
+                    <Input
+                      className="comment"
+                      placeholder="reply comment"
+                      value={ replyText }
+                      onChange={ handleReplyInput2 }
+                      onKeyPress={ submitReply }
+                    />
                   </Comment.Content>
                 )
             }
