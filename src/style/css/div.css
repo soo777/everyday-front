@@ -22,6 +22,7 @@
 
 .board section {
     min-height: 63rem;
+    overflow: auto;
 }
 
 .board .leftBar {
@@ -153,6 +154,10 @@
 
 .board .middle.content .itemList .ui.comments .content .metadata {
     margin: 0px;
+}
+
+.board .middle.content .itemList .ui.comments .comment {
+    position: unset;
 }
 
 .board .middle.content .itemList .ui.comments .ui.comments {
