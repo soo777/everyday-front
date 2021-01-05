@@ -131,7 +131,7 @@
     max-width: 100%;
     background-color: #ebebeb;
     border-radius: 10px;
-    padding: 5px;
+    padding: 10px;
 }
 
 .board .middle.content .itemList .ui.comments .option {
@@ -154,6 +154,10 @@
 
 .board .middle.content .itemList .ui.comments .content .metadata {
     margin: 0px;
+}
+
+.board .middle.content .itemList .ui.comments .text {
+    padding-bottom: 15px;
 }
 
 .board .middle.content .itemList .ui.comments .comment {
