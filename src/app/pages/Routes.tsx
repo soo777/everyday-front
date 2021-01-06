@@ -9,7 +9,8 @@ function Routes() {
     <>
       <Switch>
         <Route path="/boardList" render={ (props) => <BoardListPage { ...props } /> } />
-        <Route path="/board" render={ (props) => <BoardPage /> } />
+        <Route path="/board/feed" render={ (props) => <BoardPage { ...props } /> } />
+        <Route path="/board/member" render={ (props) => <BoardPage { ...props } /> } />
         <Route path="/" render={ (props) => <LoginPage { ...props } /> } />
       </Switch>
     </>

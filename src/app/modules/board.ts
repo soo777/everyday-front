@@ -3,6 +3,7 @@ import { ActionType, createReducer, createAction } from 'typesafe-actions';
 // const GET_BOARD_LIST = 'boardList/GET_BOARD_LIST' as const;
 const GET_BOARD_LIST = 'board/GET_BOARD_LIST';
 const SET_CREATE_BOARD_MODAL = 'board/SET_CREATE_BOARD_MODAL';
+const SET_BOARD_MENU = 'board/SET_BOARD_MENU';
 
 // export const getBoardList = (list:any) => ({
 //   type: GET_BOARD_LIST,
@@ -10,15 +11,17 @@ const SET_CREATE_BOARD_MODAL = 'board/SET_CREATE_BOARD_MODAL';
 // });
 export const getBoardList = createAction(GET_BOARD_LIST)<any>();
 export const setCreateBoardModal = createAction(SET_CREATE_BOARD_MODAL)<boolean>();
+export const setBoardMenu = createAction(SET_BOARD_MENU)<string>();
 
 // type BoardAction =
 //   | ReturnType<typeof getBoardList>;
-const actions = { getBoardList, setCreateBoardModal };
+const actions = { getBoardList, setCreateBoardModal, setBoardMenu };
 type BoardAction = ActionType<typeof actions>;
 
 type BoardState = {
   boardList: any,
   createBoardModal:boolean,
+  boardMenu:string,
 }
 
 const initialState: BoardState = {
@@ -28,6 +31,7 @@ const initialState: BoardState = {
     { id: 'board3', boardName: 'board3' },
   ],
   createBoardModal: false,
+  boardMenu: '',
 };
 
 // function boardList(state:BoardState = initialState, action: BoardAction) {
@@ -41,6 +45,7 @@ const initialState: BoardState = {
 const board = createReducer<BoardState, BoardAction>(initialState, {
   [GET_BOARD_LIST]: (state, action) => ({ ...state, boardList: action.payload }),
   [SET_CREATE_BOARD_MODAL]: (state, action) => ({ ...state, createBoardModal: action.payload }),
+  [SET_BOARD_MENU]: (state, action) => ({ ...state, boardMenu: action.payload }),
 });
 
 export default board;

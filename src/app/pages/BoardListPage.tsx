@@ -34,7 +34,7 @@ function BoardListPage(routesProps: RouteComponentProps) {
 
     localStorage.setItem(Constant.BOARD_KEY, board.boardKey);
 
-    routesProps.history.push('/board');
+    routesProps.history.push('/board/feed');
   };
 
   const createBoard = () => {
