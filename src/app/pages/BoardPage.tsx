@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  AppLayout, Board, Item, LeftSideBar, RightSideBar,
+  AppLayout, Board, Item, LeftSideBar, Member, RightSideBar,
 } from 'app/ui';
 import { RouteComponentProps } from 'react-router-dom';
 import { Constant } from '../config';
@@ -22,7 +22,7 @@ function BoardPage(routesProps: RouteComponentProps) {
         <div className="board">
           <section>
             <LeftSideBar { ...routesProps } />
-            { board.boardMenu === Constant.BOARD_MENU.FEED ? <Board /> : null }
+            { board.boardMenu === Constant.BOARD_MENU.FEED ? <Board /> : <Member /> }
             <RightSideBar />
           </section>
         </div>

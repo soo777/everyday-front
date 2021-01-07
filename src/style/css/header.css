@@ -16,3 +16,8 @@
 .top.header .user {
     float: right;
 }
+
+.list.header {
+    padding: 10px;
+    background: aquamarine;
+}
