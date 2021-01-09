@@ -23,3 +23,11 @@ body {
 .font20 {
     font-size: 20px;
 }
+
+.float_left {
+    float: left;
+}
+
+.icon {
+    cursor: pointer;
+}

@@ -206,3 +206,9 @@
     float: left;
     /*background-color: darkgrey;*/
 }
+
+.list.header .plus {
+    margin-left: 10px;
+    font-size: larger;
+    vertical-align: middle;
+}
