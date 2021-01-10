@@ -1,9 +1,12 @@
-import React from 'react';
-import { Icon } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Button, Icon, Modal } from 'semantic-ui-react';
 
 function Member() {
+  const [memberModal, setMemberModal] = useState<boolean>(false);
+
   const addMember = () => {
     console.log('add member');
+    setMemberModal(true);
   };
 
   return (
@@ -34,6 +37,14 @@ function Member() {
           </div>
         </div>
       </div>
+
+      <Modal
+        open={ memberModal }
+        onClose={ () => { setMemberModal(false); } }
+        header="Add Member"
+        content="Call Benjamin regarding the reports."
+        actions={ ['Close'] }
+      />
     </>
   );
 }
