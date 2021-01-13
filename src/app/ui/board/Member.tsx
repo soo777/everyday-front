@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Icon, Modal } from 'semantic-ui-react';
+import {
+  Button, Icon, Input, Modal,
+} from 'semantic-ui-react';
 import { Constant } from '../../config';
 import { default as axiosInstance } from '../../util/AxiosUtil';
 import useUser from '../../hooks/useUser';
+import { AddMemberModal } from '../common';
 
 const axios = axiosInstance.instance;
 
@@ -60,12 +63,26 @@ function Member() {
       </div>
 
       <Modal
-        open={ memberModal }
+        // open={ memberModal }
+        open
         onClose={ () => { setMemberModal(false); } }
-        header="Add Member"
-        content="Call Benjamin regarding the reports."
-        actions={ ['Close'] }
-      />
+        size="tiny"
+      >
+        <Modal.Header>Add Member</Modal.Header>
+        <Modal.Content className="h300">
+          <Input
+            placeholder="Search user"
+          />
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={ () => setMemberModal(false) } positive>Invite</Button>
+          <Button onClick={ () => setMemberModal(false) }>Cancel</Button>
+        </Modal.Actions>
+      </Modal>
+
+      {/*{*/}
+      {/*  memberModal ? <AddMemberModal /> : null*/}
+      {/*}*/}
     </>
   );
 }
