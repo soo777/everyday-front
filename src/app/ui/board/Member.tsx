@@ -6,13 +6,13 @@ import { Constant } from '../../config';
 import { default as axiosInstance } from '../../util/AxiosUtil';
 import useUser from '../../hooks/useUser';
 import { AddMemberModal } from '../common';
+import useModal from '../../hooks/useModal';
 
 const axios = axiosInstance.instance;
 
 function Member() {
-  const [memberModal, setMemberModal] = useState<boolean>(false);
-
   const { user, getMemberListFn } = useUser();
+  const { modal, setAddMemberModalFn } = useModal();
 
   const getMemberList = async () => {
     const boardKey = localStorage.getItem(Constant.BOARD_KEY);
@@ -34,8 +34,7 @@ function Member() {
   }, []);
 
   const addMember = () => {
-    console.log('add member');
-    setMemberModal(true);
+    setAddMemberModalFn(true);
   };
 
   return (
@@ -61,28 +60,9 @@ function Member() {
           }
         </div>
       </div>
-
-      <Modal
-        // open={ memberModal }
-        open
-        onClose={ () => { setMemberModal(false); } }
-        size="tiny"
-      >
-        <Modal.Header>Add Member</Modal.Header>
-        <Modal.Content className="h300">
-          <Input
-            placeholder="Search user"
-          />
-        </Modal.Content>
-        <Modal.Actions>
-          <Button onClick={ () => setMemberModal(false) } positive>Invite</Button>
-          <Button onClick={ () => setMemberModal(false) }>Cancel</Button>
-        </Modal.Actions>
-      </Modal>
-
-      {/*{*/}
-      {/*  memberModal ? <AddMemberModal /> : null*/}
-      {/*}*/}
+      {
+        modal.addMemberModal ? <AddMemberModal /> : ''
+      }
     </>
   );
 }

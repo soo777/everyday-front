@@ -5,11 +5,12 @@ import {
 import useUser from '../../hooks/useUser';
 import { Constant } from '../../config';
 import { default as axiosInstance } from '../../util/AxiosUtil';
+import useModal from "../../hooks/useModal";
 
 const axios = axiosInstance.instance;
 
 function AddMemberModal() {
-  const { user, handleUserInfoModalFn } = useUser();
+  const { modal, setAddMemberModalFn } = useModal();
 
   const [userId, setUserId] = useState<string>('');
   const [name, setName] = useState<string>('');
@@ -37,69 +38,25 @@ function AddMemberModal() {
   }, []);
 
   const closeModal = () => {
-    handleUserInfoModalFn(false);
+    setAddMemberModalFn(false);
   };
 
   return (
     <>
       <Modal
         size="tiny"
-        open={ user.userInfoModal }
+        open={ modal.addMemberModal }
         onClose={ closeModal }
       >
-        <Modal.Header>My Info</Modal.Header>
-        <Modal.Content>
-          <Form>
-            <Table celled>
-              <Table.Body>
-                <Table.Row>
-                  <Table.Cell>
-                    ID
-                  </Table.Cell>
-                  <Table.Cell>
-                    { userId }
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>
-                    Password
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Input
-                      type="password"
-                      // value={ password }
-                      // onChange={ handlePassword }
-                    />
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>
-                    Password Confirm
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Input
-                      type="password"
-                      // value={ passwordConfirm }
-                      // onChange={ handlePasswordConfirm }
-                    />
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>
-                    Name
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Input
-                      value={ name }
-                    />
-                  </Table.Cell>
-                </Table.Row>
-              </Table.Body>
-            </Table>
-          </Form>
+        <Modal.Header>Add Member</Modal.Header>
+        <Modal.Content className="h300">
+          <Input
+            placeholder="Search user"
+          />
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={ closeModal }>OK</Button>
+          <Button onClick={ () => setAddMemberModalFn(false) } positive>Invite</Button>
+          <Button onClick={ () => setAddMemberModalFn(false) }>Cancel</Button>
         </Modal.Actions>
       </Modal>
     </>

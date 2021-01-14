@@ -13,8 +13,6 @@ import { Constant } from '../config';
 const axios = axiosInstance.instance;
 
 function BoardListPage(routesProps: RouteComponentProps) {
-  // const [createModal, setCreateModal] = useState(false);
-
   const { board, getBoardListFn, setCreateBoardModalFn } = useBoard();
 
   const getBoardList = async () => {
