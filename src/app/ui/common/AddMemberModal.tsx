@@ -43,8 +43,12 @@ function AddMemberModal() {
   }, []);
 
   const searchUser = async (event: SyntheticEvent, data: any) => {
-    console.log(data.searchQuery);
     const searchParam = data.searchQuery;
+
+    if (searchParam === '' || undefined) {
+      setSearchList([]);
+      return;
+    }
 
     const payload = {
       params: {
@@ -53,12 +57,17 @@ function AddMemberModal() {
     };
 
     await axios.get('/api/v1/user/list', payload).then((data) => {
-      console.log(data);
+      // console.log(data);
       if (data.status) {
-        // setSearchList(data.data.object);
         const arr = data.data.object;
 
-        // todo 데이터로 option 배열 만들기
+        const memberList = [];
+
+        for (let i = 0; i < arr.length; i++) {
+          const tempArr = { key: i, value: arr[i].userId, text: arr[i].userId };
+          memberList.push(tempArr);
+        }
+        setSearchList(memberList);
       }
     });
   };
@@ -76,9 +85,9 @@ function AddMemberModal() {
       >
         <Modal.Header>Add Member</Modal.Header>
         <Modal.Content className="h300">
-          <Input
-            placeholder="Search user"
-          />
+          { /* <Input */ }
+          { /*  placeholder="Search user" */ }
+          { /* /> */ }
           <Dropdown
             placeholder="Search User"
             search
