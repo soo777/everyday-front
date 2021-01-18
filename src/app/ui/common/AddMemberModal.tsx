@@ -1,11 +1,7 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import {
-  Button, Dropdown, Form, Input, Modal, Segment, Select, Table,
+  Button, Dropdown, DropdownProps, Modal,
 } from 'semantic-ui-react';
-import faker from 'faker';
-import _ from 'lodash';
-import useUser from '../../hooks/useUser';
-import { Constant } from '../../config';
 import { default as axiosInstance } from '../../util/AxiosUtil';
 import useModal from '../../hooks/useModal';
 
@@ -14,36 +10,17 @@ const axios = axiosInstance.instance;
 function AddMemberModal() {
   const { modal, setAddMemberModalFn } = useModal();
 
-  const [userId, setUserId] = useState<string>('');
-  const [name, setName] = useState<string>('');
-
-  //   { key: 'ax', value: 'ax', text: 'Aland Islands' },
+  const [searchInput, setSearchInput] = useState<string>('');
   const [searchList, setSearchList] = useState<any>([]);
-
-  const getUserDetail = async () => {
-    const userId = localStorage.getItem(Constant.USER_ID);
-
-    const payload = {
-      params: {
-        userId,
-      },
-    };
-
-    await axios.get('/api/v1/user/userDetail', payload).then((data) => {
-      console.log(data);
-      if (data.status) {
-        setUserId(data.data.object.userId);
-        setName(data.data.object.name);
-      }
-    });
-  };
+  const [memberList, setMemberList] = useState<any>([]);
 
   useEffect(() => {
-    getUserDetail().then((r) => {});
   }, []);
 
   const searchUser = async (event: SyntheticEvent, data: any) => {
     const searchParam = data.searchQuery;
+
+    setSearchInput(searchParam);
 
     if (searchParam === '' || undefined) {
       setSearchList([]);
@@ -72,6 +49,24 @@ function AddMemberModal() {
     });
   };
 
+  const selectUser = (event: SyntheticEvent, data: DropdownProps) => {
+    for (let i = 0; i < memberList.length; i++) {
+      if (memberList[i].userId === data.value) {
+        alert('already add user');
+        return;
+      }
+    }
+
+    const member = {
+      key: data.value,
+      userId: data.value,
+    };
+
+    setMemberList(memberList.concat(member));
+    setSearchList([]);
+    setSearchInput('');
+  };
+
   const closeModal = () => {
     setAddMemberModalFn(false);
   };
@@ -85,9 +80,6 @@ function AddMemberModal() {
       >
         <Modal.Header>Add Member</Modal.Header>
         <Modal.Content className="h300">
-          { /* <Input */ }
-          { /*  placeholder="Search user" */ }
-          { /* /> */ }
           <Dropdown
             placeholder="Search User"
             search
@@ -95,7 +87,18 @@ function AddMemberModal() {
             options={ searchList }
             noResultsMessage={ null }
             onSearchChange={ searchUser }
+            onChange={ selectUser }
+            value={ searchInput }
           />
+          <div>
+            {
+              memberList.map((data:any) => (
+                <div className="pd5" key={ data.userId }>
+                  { data.userId }
+                </div>
+              ))
+            }
+          </div>
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={ () => setAddMemberModalFn(false) } positive>Invite</Button>
