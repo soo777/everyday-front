@@ -1,13 +1,19 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import {
-  Button, Dropdown, DropdownProps, Modal,
+  Button, Dropdown, DropdownProps, Icon, Modal,
 } from 'semantic-ui-react';
+import qs from 'qs';
 import { default as axiosInstance } from '../../util/AxiosUtil';
 import useModal from '../../hooks/useModal';
+import { Constant } from '../../config';
 
 const axios = axiosInstance.instance;
 
-function AddMemberModal() {
+interface Props {
+  refresh:any
+}
+
+function AddMemberModal(props:Props) {
   const { modal, setAddMemberModalFn } = useModal();
 
   const [searchInput, setSearchInput] = useState<string>('');
@@ -49,22 +55,84 @@ function AddMemberModal() {
     });
   };
 
+  const checkMember = async (memberSelect:any) => {
+    const boardKey = localStorage.getItem(Constant.BOARD_KEY);
+
+    const payload = {
+      params: {
+        boardKey,
+        userId: memberSelect,
+      },
+    };
+
+    const bool = await axios.get('/api/v1/user/member/check', payload).then((data) => {
+      console.log(data);
+      if (data.status) {
+        if (!data.data.status) {
+          return false;
+        }
+        return true;
+      }
+      return false;
+    });
+
+    return bool;
+  };
+
   const selectUser = (event: SyntheticEvent, data: DropdownProps) => {
+    const memberSelect = data.value;
     for (let i = 0; i < memberList.length; i++) {
-      if (memberList[i].userId === data.value) {
+      if (memberList[i].userId === memberSelect) {
         alert('already add user');
         return;
       }
     }
 
-    const member = {
-      key: data.value,
-      userId: data.value,
+    // member 유무 체크
+    checkMember(memberSelect).then((data) => {
+      if (!data) {
+        alert(`${memberSelect} is already a member`);
+      } else {
+        const member = {
+          key: memberSelect,
+          userId: memberSelect,
+        };
+
+        setMemberList(memberList.concat(member));
+        setSearchList([]);
+        setSearchInput('');
+      }
+    });
+  };
+
+  const addMember = async () => {
+    const arr:string[] = [];
+
+    memberList.forEach((member: any) => {
+      arr.push(member.userId);
+    });
+
+    console.log(arr);
+
+    const payload = {
+      params: {
+        boardKey: localStorage.getItem(Constant.BOARD_KEY),
+        memberList: arr,
+      },
+      paramsSerializer: (params: any) => qs.stringify(params, { arrayFormat: 'repeat' }),
     };
 
-    setMemberList(memberList.concat(member));
-    setSearchList([]);
-    setSearchInput('');
+    await axios.post('/api/v1/user/board/memberList', null, payload).then((data) => {
+      console.log(data);
+      if (data.status === 200 && data.data.status) {
+        setAddMemberModalFn(false);
+        props.refresh();
+      }
+    });
+  };
+
+  const deleteMember = (userId:string) => {
+    setMemberList(memberList.filter((member:any) => member.userId !== userId));
   };
 
   const closeModal = () => {
@@ -90,18 +158,24 @@ function AddMemberModal() {
             onChange={ selectUser }
             value={ searchInput }
           />
-          <div>
+          <div className="pd_top10">
             {
               memberList.map((data:any) => (
-                <div className="pd5" key={ data.userId }>
+                <div className="pd5 font15" key={ data.userId }>
                   { data.userId }
+                  <span
+                    className="float_right"
+                    onClick={ () => deleteMember(data.userId) }
+                  >
+                    <Icon name="delete" />
+                  </span>
                 </div>
               ))
             }
           </div>
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={ () => setAddMemberModalFn(false) } positive>Invite</Button>
+          <Button onClick={ addMember } positive>Invite</Button>
           <Button onClick={ () => setAddMemberModalFn(false) }>Cancel</Button>
         </Modal.Actions>
       </Modal>

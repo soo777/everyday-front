@@ -61,7 +61,13 @@ function Member() {
         </div>
       </div>
       {
-        modal.addMemberModal ? <AddMemberModal /> : ''
+        modal.addMemberModal
+          ? (
+            <AddMemberModal
+              refresh={ getMemberList }
+            />
+          )
+          : ''
       }
     </>
   );

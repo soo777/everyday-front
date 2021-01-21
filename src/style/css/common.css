@@ -16,6 +16,10 @@ body {
     padding: 10px;
 }
 
+.pd_top10 {
+    padding-top: 10px;
+}
+
 .font15 {
     font-size: 15px;
 }
@@ -26,6 +30,10 @@ body {
 
 .float_left {
     float: left;
+}
+
+.float_right {
+    float: right;
 }
 
 .icon {
