@@ -6,6 +6,8 @@ import qs from 'qs';
 import { default as axiosInstance } from '../../util/AxiosUtil';
 import useModal from '../../hooks/useModal';
 import { Constant } from '../../config';
+import useCommon from '../../hooks/useCommon';
+import { AlertModal } from './index';
 
 const axios = axiosInstance.instance;
 
@@ -15,6 +17,7 @@ interface Props {
 
 function AddMemberModal(props:Props) {
   const { modal, setAddMemberModalFn } = useModal();
+  const { handleAlertModalFn, setAlertModalFn } = useCommon();
 
   const [searchInput, setSearchInput] = useState<string>('');
   const [searchList, setSearchList] = useState<any>([]);
@@ -66,7 +69,7 @@ function AddMemberModal(props:Props) {
     };
 
     const bool = await axios.get('/api/v1/user/member/check', payload).then((data) => {
-      console.log(data);
+      // console.log(data);
       if (data.status) {
         if (!data.data.status) {
           return false;
@@ -83,7 +86,8 @@ function AddMemberModal(props:Props) {
     const memberSelect = data.value;
     for (let i = 0; i < memberList.length; i++) {
       if (memberList[i].userId === memberSelect) {
-        alert('already add user');
+        setAlertModalFn('Info', 'already in add list');
+        handleAlertModalFn(true);
         return;
       }
     }
@@ -91,7 +95,8 @@ function AddMemberModal(props:Props) {
     // member 유무 체크
     checkMember(memberSelect).then((data) => {
       if (!data) {
-        alert(`${memberSelect} is already a member`);
+        setAlertModalFn('Info', `${memberSelect} is already a member`);
+        handleAlertModalFn(true);
       } else {
         const member = {
           key: memberSelect,
@@ -112,8 +117,6 @@ function AddMemberModal(props:Props) {
       arr.push(member.userId);
     });
 
-    console.log(arr);
-
     const payload = {
       params: {
         boardKey: localStorage.getItem(Constant.BOARD_KEY),
@@ -123,7 +126,7 @@ function AddMemberModal(props:Props) {
     };
 
     await axios.post('/api/v1/user/board/memberList', null, payload).then((data) => {
-      console.log(data);
+      // console.log(data);
       if (data.status === 200 && data.data.status) {
         setAddMemberModalFn(false);
         props.refresh();
@@ -179,6 +182,7 @@ function AddMemberModal(props:Props) {
           <Button onClick={ () => setAddMemberModalFn(false) }>Cancel</Button>
         </Modal.Actions>
       </Modal>
+      <AlertModal />
     </>
   );
 }

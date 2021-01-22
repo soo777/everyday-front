@@ -12,8 +12,7 @@ type ModalState = {
 }
 
 const initialState: ModalState = {
-  // addMemberModal: false,
-  addMemberModal: true,
+  addMemberModal: false,
 };
 
 const modal = createReducer<ModalState, ModalAction>(initialState, {

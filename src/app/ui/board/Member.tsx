@@ -5,14 +5,16 @@ import {
 import { Constant } from '../../config';
 import { default as axiosInstance } from '../../util/AxiosUtil';
 import useUser from '../../hooks/useUser';
-import { AddMemberModal } from '../common';
+import { AddMemberModal, AlertModal } from '../common';
 import useModal from '../../hooks/useModal';
+import useCommon from '../../hooks/useCommon';
 
 const axios = axiosInstance.instance;
 
 function Member() {
   const { user, getMemberListFn } = useUser();
   const { modal, setAddMemberModalFn } = useModal();
+  const { handleAlertModalFn, setAlertModalFn } = useCommon();
 
   const getMemberList = async () => {
     const boardKey = localStorage.getItem(Constant.BOARD_KEY);
@@ -35,6 +37,12 @@ function Member() {
 
   const addMember = () => {
     setAddMemberModalFn(true);
+  };
+
+  const successAddMember = () => {
+    getMemberList();
+    setAlertModalFn('Info', 'add member success.');
+    handleAlertModalFn(true);
   };
 
   return (
@@ -60,11 +68,12 @@ function Member() {
           }
         </div>
       </div>
+      <AlertModal />
       {
         modal.addMemberModal
           ? (
             <AddMemberModal
-              refresh={ getMemberList }
+              refresh={ successAddMember }
             />
           )
           : ''
