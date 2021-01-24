@@ -1,3 +1,9 @@
+.login.title {
+    position: absolute;
+    top: 28%;
+    left: 48%;
+}
+
 .login .login_input {
     padding: 5px 5px 0px 5px;
 }
@@ -12,7 +18,7 @@
 }
 
 .sign_div .signIn:hover {
-    color: aquamarine;
+    color: #ac1b1b;
 }
 
 .board {

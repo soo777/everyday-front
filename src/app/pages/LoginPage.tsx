@@ -66,6 +66,9 @@ function LoginPage(routesProps: RouteComponentProps) {
 
   return (
     <>
+      <div className="login title">
+        <h1>Everyday</h1>
+      </div>
       <div className="login">
         <Form>
           <div className="header">
@@ -80,6 +83,7 @@ function LoginPage(routesProps: RouteComponentProps) {
           </div>
           <div className="login_input">
             <Input
+              type="password"
               value={ password }
               onChange={ handlePasswordInput }
               placeholder="password"
