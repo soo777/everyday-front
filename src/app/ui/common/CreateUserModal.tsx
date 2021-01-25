@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Button, Form, Input, Modal, Table,
 } from 'semantic-ui-react';
@@ -40,15 +40,17 @@ function CreateUserModal() {
   };
 
   const signIn = async () => {
-    // handleCreateUserModalFn(false);
     console.log(`${userId} ${password} ${passwordConfirm} ${name}`);
 
-    if (password !== passwordConfirm) {
-      console.log('check password');
+    if (userId === '' || password === '' || passwordConfirm === '' || name === '') {
+      setAlertModalFn(Message.alert, Message.signIn.check_input);
+      handleAlertModalFn(true);
+      return;
+    }
 
+    if (password !== passwordConfirm) {
       setAlertModalFn(Message.alert, Message.password_fail);
       handleAlertModalFn(true);
-
       return;
     }
 
@@ -61,13 +63,15 @@ function CreateUserModal() {
 
     await axios.post('/api/v1/signIn', payload).then((data) => {
       console.log(data);
-      if (data.data.status) {
-        setAlertModalFn(Message.alert, Message.signIn_success);
-        handleAlertModalFn(true);
-        handleCreateUserModalFn(false);
-      } else {
-        setAlertModalFn(Message.alert, Message.userId_fail);
-        handleAlertModalFn(true);
+      if (data.status === 200) {
+        if (data.data.status) {
+          setAlertModalFn(Message.alert, Message.signIn_success);
+          handleAlertModalFn(true);
+          handleCreateUserModalFn(false);
+        } else {
+          setAlertModalFn(Message.alert, Message.userId_fail);
+          handleAlertModalFn(true);
+        }
       }
     });
   };

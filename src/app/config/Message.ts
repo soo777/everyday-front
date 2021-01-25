@@ -3,4 +3,7 @@ export const Message = Object.freeze({
   userId_fail: 'ID is already existed',
   password_fail: 'Password is not matched. please check',
   signIn_success: 'signIn success',
+  signIn: {
+    check_input: 'Check your input',
+  },
 });

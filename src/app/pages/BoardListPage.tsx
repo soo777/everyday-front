@@ -45,9 +45,6 @@ function BoardListPage(routesProps: RouteComponentProps) {
     <>
       <AppLayout>
         <div className="sideBar">
-          { /* { */ }
-          { /*  console.log(board.boardList) */ }
-          { /* } */ }
           {
           board.boardList
             ? board.boardList.map((boardList:any, index:any) => (
@@ -68,16 +65,13 @@ function BoardListPage(routesProps: RouteComponentProps) {
             Create Board
           </div>
         </div>
-
-        { /* <Test /> */ }
-
         {
         board.createBoardModal
           ? (
             <CreateBoardModal />
           )
           : ''
-      }
+        }
       </AppLayout>
     </>
   );
