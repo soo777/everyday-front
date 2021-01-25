@@ -15,7 +15,7 @@ function AppLayout({ children }: Props) {
 
           { children }
 
-          <Footer />
+          { /* <Footer /> */ }
         </div>
       </Container>
     </>
