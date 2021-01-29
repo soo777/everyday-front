@@ -1,4 +1,4 @@
-import { Message } from "../config";
+import { Message } from '../config';
 
 class CommonUtil {
   checkPasswordValidation = (password:string | undefined) => {

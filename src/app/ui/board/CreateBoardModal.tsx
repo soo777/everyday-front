@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Input } from 'semantic-ui-react';
+import { Button, Input, Modal } from 'semantic-ui-react';
 import useBoard from '../../hooks/useBoard';
 import { default as axiosInstance } from '../../util/AxiosUtil';
 
 const axios = axiosInstance.instance;
 
 function CreateBoardModal() {
-  const { setCreateBoardModalFn, getBoardListFn } = useBoard();
+  const { board, setCreateBoardModalFn, getBoardListFn } = useBoard();
 
   const [boardInput, setBoardInput] = useState('');
 
@@ -23,8 +23,6 @@ function CreateBoardModal() {
   };
 
   const createBoard = async () => {
-    console.log(boardInput);
-
     const payload = {
       boardName: boardInput,
     };
@@ -47,25 +45,34 @@ function CreateBoardModal() {
 
   return (
     <>
-      <div className="dimmer">
-        <div className="createModal">
-          <div className="header">
-            Create Board
-          </div>
-          <div className="content">
-            <Input
-              className="input"
-              value={ boardInput }
-              onChange={ handleBoardInput }
-              placeholder="이름을 입력하세요"
-            />
-          </div>
-          <div className="footer">
-            <Button onClick={ createBoard }>확인</Button>
-            <Button onClick={ closeModal }>취소</Button>
-          </div>
-        </div>
-      </div>
+      <Modal
+        onClose={ () => setCreateBoardModalFn(false) }
+        onOpen={ () => setCreateBoardModalFn(false) }
+        open={ board.createBoardModal }
+        size="tiny"
+      >
+        <Modal.Header>Create Board</Modal.Header>
+        <Modal.Content>
+          <Input
+            className="input"
+            value={ boardInput }
+            onChange={ handleBoardInput }
+            placeholder="이름을 입력하세요"
+          />
+        </Modal.Content>
+        <Modal.Actions>
+          <Button
+            content="Create"
+            color="green"
+            onClick={ createBoard }
+          />
+          <Button
+            content="cancel"
+            color="black"
+            onClick={ closeModal }
+          />
+        </Modal.Actions>
+      </Modal>
     </>
   );
 }

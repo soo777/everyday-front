@@ -36,8 +36,6 @@ function BoardListPage(routesProps: RouteComponentProps) {
   };
 
   const createBoard = () => {
-    console.log('create board');
-    // setCreateModal(true);
     setCreateBoardModalFn(true);
   };
 
