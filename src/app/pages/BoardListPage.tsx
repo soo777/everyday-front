@@ -47,7 +47,7 @@ function BoardListPage(routesProps: RouteComponentProps) {
           board.boardList
             ? board.boardList.map((boardList:any, index:any) => (
               <div
-                key={ boardList.id }
+                key={ boardList.boardKey }
                 onClick={ () => { clickBoard(boardList); } }
                 className="boardList"
               >

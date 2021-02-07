@@ -25,11 +25,7 @@ type BoardState = {
 }
 
 const initialState: BoardState = {
-  boardList: [
-    { id: 'board1', boardName: 'board1' },
-    { id: 'board2', boardName: 'board2' },
-    { id: 'board3', boardName: 'board3' },
-  ],
+  boardList: [],
   createBoardModal: false,
   boardMenu: '',
 };
