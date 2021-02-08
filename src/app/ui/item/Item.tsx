@@ -8,6 +8,7 @@ import { default as axiosInstance } from '../../util/AxiosUtil';
 import useItem from '../../hooks/useItem';
 import { Constant } from '../../config';
 import CommentModel from '../../model/CommentModel';
+import AuthUtil from "../../util/AuthUtil";
 
 const axios = axiosInstance.instance;
 
@@ -188,13 +189,16 @@ function Item({ item }: Props) {
             <Comment.Author>
               { item.creator }
 
-              <Dropdown icon="options" className="option">
-                <Dropdown.Menu>
-                  <Dropdown.Item text="Modify" onClick={ handleModifyItem } />
-                  <Dropdown.Item text="Delete" onClick={ deleteItem } />
-                </Dropdown.Menu>
-              </Dropdown>
-
+              {
+                item.creator === AuthUtil.getUserId() ? (
+                  <Dropdown icon="options" className="option">
+                    <Dropdown.Menu>
+                      <Dropdown.Item text="Modify" onClick={ handleModifyItem } />
+                      <Dropdown.Item text="Delete" onClick={ deleteItem } />
+                    </Dropdown.Menu>
+                  </Dropdown>
+                ) : null
+              }
             </Comment.Author>
             <Comment.Metadata>
               <div>{ item.createDate }</div>
