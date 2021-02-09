@@ -10,12 +10,21 @@ function Header() {
     handleUserInfoModalFn(true);
   };
 
+  const logout = () => {
+    localStorage.clear();
+
+    window.location.href = '/';
+  };
+
   return (
     <>
       <div className="top header">
         <div className="center aligned">
           everyday
           <span className="user">
+            <Icon name="log out" onClick={ logout } />
+          </span>
+          <span className="user pd_right5">
             <Icon name="user" onClick={ openInfo } />
           </span>
         </div>
