@@ -32,6 +32,13 @@ class AxiosUtil {
         console.log('axios error');
         console.log(error.response.status);
         console.log(error.response.data.message);
+
+        // 403 권한 에러 처리
+        if (error.response.status === 403) {
+          alert('wrong Authorization. please login.');
+          window.location.href = '/';
+        }
+
         // window.location.href = '/';
         return Promise.reject(error);
       },
