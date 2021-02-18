@@ -8,7 +8,7 @@ import { default as axiosInstance } from '../../util/AxiosUtil';
 import useItem from '../../hooks/useItem';
 import { Constant } from '../../config';
 import CommentModel from '../../model/CommentModel';
-import AuthUtil from "../../util/AuthUtil";
+import AuthUtil from '../../util/AuthUtil';
 
 const axios = axiosInstance.instance;
 
@@ -291,7 +291,8 @@ function Item({ item }: Props) {
                 )
                 : (
                   <Comment.Content>
-                    <span onClick={ handleReply }>reply comment</span>
+                    { /* <span onClick={ handleReply }>reply comment</span> */ }
+
                     { /* reply comment */ }
                     <Input
                       className="comment"

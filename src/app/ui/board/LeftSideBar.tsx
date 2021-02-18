@@ -20,8 +20,10 @@ function LeftSideBar(routesProps: RouteComponentProps) {
   return (
     <>
       <div className="leftBar">
-        <div className="menu" onClick={ setMenuFeed }><Icon name="newspaper outline" />새 소식</div>
-        <div className="menu" onClick={ setMenuMember }><Icon name="users" />멤버</div>
+        <div className="fixed">
+          <div className="menu" onClick={ setMenuFeed }><Icon name="newspaper outline" />새 소식</div>
+          <div className="menu" onClick={ setMenuMember }><Icon name="users" />멤버</div>
+        </div>
       </div>
     </>
   );

@@ -38,6 +38,11 @@
     /*background-color: cadetblue;*/
 }
 
+.board .leftBar .fixed{
+    position: fixed;
+    top: 45px;
+}
+
 .board .leftBar .menu {
     padding: 10px;
     font-size: 15px;
