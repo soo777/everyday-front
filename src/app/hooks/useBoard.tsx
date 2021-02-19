@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { RootState } from 'app/modules';
-import { getBoardList, setBoardMenu, setCreateBoardModal } from 'app/modules/board';
+import { getBoardList, setBoardMenu, setCreateBoardModal, setBoardHost } from 'app/modules/board';
 
 function useBoard() {
   const board = useSelector((state:RootState) => state.board);
@@ -22,11 +22,17 @@ function useBoard() {
     [dispatch],
   );
 
+  const setBoardHostFn = useCallback(
+    (boardHost:string) => dispatch(setBoardHost(boardHost)),
+    [dispatch],
+  );
+
   return {
     board,
     getBoardListFn,
     setCreateBoardModalFn,
     setBoardMenuFn,
+    setBoardHostFn,
   };
 }
 
