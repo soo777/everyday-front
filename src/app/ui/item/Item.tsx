@@ -223,38 +223,40 @@ function Item({ item }: Props) {
                   )
                   : (
                     // item.content
-                    <div className="imgDiv">
-                      {
-                        tempImg ? (
-                          tempImg.map((img: string, index:number, arr:any) => (
-                            // <div className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage' }>
-                            <div
-                              className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage float_left' }
-                              onClick={ () => { setImageModal(true); } }
-                            >
-                              <img className="imgPreview" src={ img } alt="image1" />
-                            </div>
-                          ))
-                        )
-                          : ''
-                      }
-                      <div className="moreImg">
-                        <div>
-                          <span onClick={ () => { setImageModal(true); } }>
-                            {
+                    <div>
+                      <div className="imgDiv">
+                        {
+                          tempImg ? (
+                            tempImg.map((img: string, index:number, arr:any) => (
+                              // <div className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage' }>
+                              <div
+                                className={ arr.length - 1 !== index ? 'fileImage float_left' : 'fileImage float_left' }
+                                onClick={ () => { setImageModal(true); } }
+                              >
+                                <img className="imgPreview" src={ img } alt="image1" />
+                              </div>
+                            ))
+                          )
+                            : ''
+                        }
+                        <div className="moreImg">
+                          <div>
+                            <span onClick={ () => { setImageModal(true); } }>
+                              {
                               tempImg.length > 0 ? <Icon name="plus" className="plus" /> : null
                             }
-                          </span>
-                          { /* <br /> */ }
-                          { /* <span className="more">more</span> */ }
+                            </span>
+                            { /* <br /> */ }
+                            { /* <span className="more">more</span> */ }
+                          </div>
                         </div>
                       </div>
                       <div>
                         { item.content }
                       </div>
                     </div>
-                  )
 
+                  )
               }
             </Comment.Text>
 

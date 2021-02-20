@@ -184,6 +184,13 @@
     line-height: 220px;
 }
 
+/* item에서 사진 밑에 content float 초기화 */
+.board .middle.content .itemList .ui.comments .imgDiv:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
 .board .middle.content .itemList .ui.comments .imgDiv .fileImage .imgPreview {
     max-width: 200px;
     max-height: 200px;

@@ -21,8 +21,8 @@ function LeftSideBar(routesProps: RouteComponentProps) {
     <>
       <div className="leftBar">
         <div className="fixed">
-          <div className="menu" onClick={ setMenuFeed }><Icon name="newspaper outline" />새 소식</div>
-          <div className="menu" onClick={ setMenuMember }><Icon name="users" />멤버</div>
+          <div className="menu pointer" onClick={ setMenuFeed }><Icon name="newspaper outline" />새 소식</div>
+          <div className="menu pointer" onClick={ setMenuMember }><Icon name="users" />멤버</div>
         </div>
       </div>
     </>
