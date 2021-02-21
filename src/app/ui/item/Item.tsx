@@ -239,17 +239,18 @@ function Item({ item }: Props) {
                           )
                             : ''
                         }
-                        <div className="moreImg">
-                          <div>
-                            <span onClick={ () => { setImageModal(true); } }>
-                              {
-                              tempImg.length > 0 ? <Icon name="plus" className="plus" /> : null
-                            }
-                            </span>
-                            { /* <br /> */ }
-                            { /* <span className="more">more</span> */ }
-                          </div>
-                        </div>
+                        { /* + 버튼 */ }
+                        { /* <div className="moreImg"> */ }
+                        { /*  <div> */ }
+                        { /*    <span onClick={ () => { setImageModal(true); } }> */ }
+                        { /*      { */ }
+                        { /*      tempImg.length > 0 ? <Icon name="plus" className="plus" /> : null */ }
+                        { /*      } */ }
+                        { /*    </span> */ }
+                        { /*    <span className="more">more</span> */ }
+                        { /*  </div> */ }
+                        { /* </div> */ }
+                        { /* + 버튼 */ }
                       </div>
                       <div>
                         { item.content }
@@ -261,6 +262,7 @@ function Item({ item }: Props) {
             </Comment.Text>
 
             { /* comment */ }
+            <div className="pd_bottom5">Comment</div>
             {
               item.comment.length
                 ? (

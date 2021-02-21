@@ -10,6 +10,10 @@ function Header() {
     handleUserInfoModalFn(true);
   };
 
+  const goHome = () => {
+    window.location.href = '/boardList';
+  };
+
   const logout = () => {
     localStorage.clear();
 
@@ -20,6 +24,9 @@ function Header() {
     <>
       <div className="top header">
         <div className="center aligned">
+          <span className="home">
+            <Icon name="home" onClick={ goHome } />
+          </span>
           everyday
           <span className="user">
             <Icon name="log out" onClick={ logout } />

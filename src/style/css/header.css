@@ -13,6 +13,10 @@
     top: 0px;
 }
 
+.top.header .home {
+    float: left;
+}
+
 .top.header .user {
     float: right;
 }
