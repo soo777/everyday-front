@@ -41,7 +41,7 @@ function BoardListPage(routesProps: RouteComponentProps) {
 
   return (
     <>
-      <AppLayout>
+      <AppLayout { ...routesProps }>
         <div className="sideBar">
           {
           board.boardList

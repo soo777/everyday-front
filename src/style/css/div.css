@@ -225,6 +225,11 @@
     /*background-color: darkgrey;*/
 }
 
+.board .rightBar .fixed{
+    position: fixed;
+    top: 45px;
+}
+
 .list.header .plus {
     margin-left: 10px;
     font-size: larger;

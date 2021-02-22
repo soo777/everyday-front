@@ -5,7 +5,11 @@ function RightSideBar() {
   return (
     <>
       <div className="rightBar">
-        sidebar
+        <div className="fixed">
+          <div>
+            right sidebar
+          </div>
+        </div>
       </div>
     </>
   );

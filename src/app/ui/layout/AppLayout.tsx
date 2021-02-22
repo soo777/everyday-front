@@ -2,18 +2,14 @@ import React, { ReactChild, ReactChildren } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Footer, Header } from './index';
 
-interface Props {
-  children: any;
-}
-
-function AppLayout({ children }: Props) {
+function AppLayout(routesProps:any) {
   return (
     <>
       <Container>
         <div className="everyday">
-          <Header />
+          <Header { ...routesProps } />
 
-          { children }
+          { routesProps.children }
 
           { /* <Footer /> */ }
         </div>

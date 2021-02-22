@@ -18,7 +18,7 @@ function BoardPage(routesProps: RouteComponentProps) {
 
   return (
     <>
-      <AppLayout>
+      <AppLayout { ...routesProps }>
         <div className="board">
           <section>
             <LeftSideBar { ...routesProps } />

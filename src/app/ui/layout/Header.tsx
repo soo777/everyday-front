@@ -1,9 +1,10 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
+import { RouteComponentProps } from 'react-router-dom';
 import { UserInfoModal } from '../common';
 import useUser from '../../hooks/useUser';
 
-function Header() {
+function Header(routesProps: RouteComponentProps) {
   const { user, handleUserInfoModalFn } = useUser();
 
   const openInfo = () => {
@@ -11,13 +12,13 @@ function Header() {
   };
 
   const goHome = () => {
-    window.location.href = '/boardList';
+    routesProps.history.push('/boardList');
   };
 
   const logout = () => {
     localStorage.clear();
 
-    window.location.href = '/';
+    routesProps.history.push('/');
   };
 
   return (
