@@ -71,9 +71,9 @@ function LoginPage(routesProps: RouteComponentProps) {
       </div>
       <div className="login">
         <Form>
-          <div className="header">
-            <Header as="h3">Login</Header>
-          </div>
+          {/*<div className="header">*/}
+          {/*  <Header as="h3">Login</Header>*/}
+          {/*</div>*/}
           <div className="login_input">
             <Input
               value={ userId }
