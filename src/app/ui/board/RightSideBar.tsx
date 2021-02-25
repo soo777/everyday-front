@@ -7,7 +7,7 @@ function RightSideBar() {
       <div className="rightBar">
         <div className="fixed">
           <div>
-            right sidebar
+            {/*right sidebar*/}
           </div>
         </div>
       </div>

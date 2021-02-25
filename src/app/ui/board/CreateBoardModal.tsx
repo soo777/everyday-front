@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Button, Input, Modal } from 'semantic-ui-react';
 import useBoard from '../../hooks/useBoard';
 import { default as axiosInstance } from '../../util/AxiosUtil';
+import useCommon from '../../hooks/useCommon';
+import { AlertModal } from '../common';
 
 const axios = axiosInstance.instance;
 
 function CreateBoardModal() {
   const { board, setCreateBoardModalFn, getBoardListFn } = useBoard();
+  const { handleAlertModalFn, setAlertModalFn } = useCommon();
 
   const [boardInput, setBoardInput] = useState('');
 
@@ -23,6 +26,12 @@ function CreateBoardModal() {
   };
 
   const createBoard = async () => {
+    if (boardInput === '') {
+      setAlertModalFn('Info', 'Check your input')
+      handleAlertModalFn(true);
+      return;
+    }
+
     const payload = {
       boardName: boardInput,
     };
@@ -73,6 +82,7 @@ function CreateBoardModal() {
           />
         </Modal.Actions>
       </Modal>
+      <AlertModal />
     </>
   );
 }
