@@ -10,7 +10,7 @@
     width: 20rem;
     height: 100vh;
     padding-top: 45px;
-    background-color: #d7d6d6;
+    background-color: #f1f3f5;
     float: left;
 }
 
@@ -27,7 +27,7 @@
     line-height: 70px;
     vertical-align: middle;
     padding-left: 20px;
-    background-color: #c6c6c6;
+    background-color: #e9ecef;
 }
 
 .sideBar .boardList:hover {
@@ -49,5 +49,5 @@
     width: 85%;
     height: 30px;
     bottom: 0;
-    background-color: #88c2f5;
+    background-color: #74c0fc;
 }
