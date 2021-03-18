@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button, Form, Header, Input,
 } from 'semantic-ui-react';
@@ -8,6 +8,7 @@ import { default as axiosInstance } from 'app/util/AxiosUtil';
 import jsonwebtoken from 'jsonwebtoken';
 import useUser from 'app/hooks/useUser';
 import { CreateUserModal } from 'app/ui/common';
+import AuthUtil from '../util/AuthUtil';
 
 const axios = axiosInstance.instance;
 
@@ -16,6 +17,10 @@ function LoginPage(routesProps: RouteComponentProps) {
   const [password, setPassword] = useState<string>('');
 
   const { user, handleCreateUserModalFn } = useUser();
+
+  useEffect(() => {
+    AuthUtil.clearLocalStorage();
+  }, []);
 
   const handleIdInput = (e:React.ChangeEvent<HTMLInputElement>) => {
     const idInput = e.target.value;
@@ -67,13 +72,13 @@ function LoginPage(routesProps: RouteComponentProps) {
   return (
     <>
       <div className="login title">
-        <h1>Everyday</h1>
+        <h1>Allday</h1>
       </div>
       <div className="login">
         <Form>
-          {/*<div className="header">*/}
-          {/*  <Header as="h3">Login</Header>*/}
-          {/*</div>*/}
+          { /* <div className="header"> */ }
+          { /*  <Header as="h3">Login</Header> */ }
+          { /* </div> */ }
           <div className="login_input">
             <Input
               value={ userId }

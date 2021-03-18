@@ -3,6 +3,7 @@ import { Icon } from 'semantic-ui-react';
 import { RouteComponentProps } from 'react-router-dom';
 import { UserInfoModal } from '../common';
 import useUser from '../../hooks/useUser';
+import AuthUtil from "../../util/AuthUtil";
 
 function Header(routesProps: RouteComponentProps) {
   const { user, handleUserInfoModalFn } = useUser();
@@ -16,7 +17,7 @@ function Header(routesProps: RouteComponentProps) {
   };
 
   const logout = () => {
-    localStorage.clear();
+    AuthUtil.clearLocalStorage();
 
     routesProps.history.push('/');
   };
