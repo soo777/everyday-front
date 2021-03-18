@@ -28,7 +28,7 @@ function Header(routesProps: RouteComponentProps) {
           <span className="home">
             <Icon name="home" onClick={ goHome } />
           </span>
-          everyday
+          Allday
           <span className="user">
             <Icon name="log out" onClick={ logout } />
           </span>
