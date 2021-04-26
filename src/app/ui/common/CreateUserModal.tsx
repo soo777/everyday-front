@@ -40,10 +40,16 @@ function CreateUserModal() {
   };
 
   const signIn = async () => {
-    console.log(`${userId} ${password} ${passwordConfirm} ${name}`);
-
     if (userId === '' || password === '' || passwordConfirm === '' || name === '') {
       setAlertModalFn(Message.alert, Message.signIn.check_input);
+      handleAlertModalFn(true);
+      return;
+    }
+
+    // 영문 체크
+    const regx = /^[a-zA-Z0-9]*$/;
+    if (!regx.test(userId)) {
+      setAlertModalFn(Message.alert, Message.userId_check);
       handleAlertModalFn(true);
       return;
     }
@@ -62,7 +68,6 @@ function CreateUserModal() {
     };
 
     await axios.post('/api/v1/signIn', payload).then((data) => {
-      console.log(data);
       if (data.status === 200) {
         if (data.data.status) {
           setAlertModalFn(Message.alert, Message.signIn_success);
