@@ -3,6 +3,7 @@ import {
   Icon, Comment, Dropdown, TextArea, Button, TextAreaProps, Modal, Image, Input,
 } from 'semantic-ui-react';
 import qs from 'qs';
+import moment from 'moment';
 import ItemModel from '../../model/ItemModel';
 import { default as axiosInstance } from '../../util/AxiosUtil';
 import useItem from '../../hooks/useItem';
@@ -154,7 +155,6 @@ function Item({ item }: Props) {
     const payload = {
       itemKey: item.itemKey,
       content: replyText,
-      creator: 'soo',
     };
 
     await axios.post('/api/v1/comment', payload).then((data) => {
@@ -201,7 +201,7 @@ function Item({ item }: Props) {
               }
             </Comment.Author>
             <Comment.Metadata>
-              <div>{ item.createDate }</div>
+              <div>{ moment(item.createDate).format('YYYY-MM-DD HH:mm:ss') }</div>
               <div>
                 <Icon name="star" />
                 { item.star }
@@ -262,13 +262,16 @@ function Item({ item }: Props) {
             </Comment.Text>
 
             { /* comment */ }
-            <div className="pd_bottom5">Comment</div>
+            <div className="pd_bottom5 font_bold">Comment</div>
             {
               item.comment.length
                 ? (
                   item.comment.map((commentList: CommentModel, index: number) => (
                     <Comment.Group>
-                      { commentList.content }
+                      <span className="font_bold">{ commentList.creator }</span>
+                      <span> : </span>
+                      <span>{ commentList.content }</span>
+                      <span className="float_right metadata">{ moment(commentList.createDate).format('YYYY-MM-DD HH:mm:ss') }</span>
                     </Comment.Group>
                   ))
                 ) : ''

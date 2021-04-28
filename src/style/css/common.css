@@ -51,3 +51,7 @@ body {
 .pointer {
     cursor: pointer;
 }
+
+.font_bold {
+    font-weight: bold;
+}
